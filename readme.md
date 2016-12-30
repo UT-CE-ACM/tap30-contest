@@ -1,6 +1,6 @@
 # Tap30 Contest
 
-This ptoject has power by UT-ACM with laravel 5.3 framework for tap30 contest! 
+This ptoject has power by UT-ACM on laravel 5.3 framework for tap30 contest! 
 
 ## Project Deployment
 
