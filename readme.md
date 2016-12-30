@@ -4,7 +4,7 @@ This ptoject has power by UT-ACM on laravel 5.3 framework for tap30 contest!
 
 ## Project Deployment
 
-After cloning the project run following commands:
+After cloning the project run following commands in project root:
 
 * In order to install dependencies and laravel package
 ~~~
