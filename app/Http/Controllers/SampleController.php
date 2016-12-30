@@ -44,15 +44,21 @@ class SampleController extends Controller
         $rules = [
             "problem_id" => "required|exists:problems,id",
             "input" => "required",
-            "output" => "required"
+            "output" => "required",
+            "attachment" => 'file',
         ];
         $this->validate($request, $rules);
 
-        Sample::create([
+        $sample = Sample::create([
             'problem_id' => $request->get('problem_id'),
             'input' => $request->get('input'),
             'output' => $request->get('output'),
         ]);
+
+        if ($request->hasFile('attachment')){
+            $sample->saveFile('attachment');
+        }
+
         return redirect('/admin/sample');
     }
 
@@ -79,7 +85,8 @@ class SampleController extends Controller
         foreach (Problem::all() as $problem){
             $problems[$problem->id] = $problem->title;
         }
-        return view('admin.sample.insert',compact('problems'))->with('sample', Sample::with('problem')->find($id));
+        $sample = Sample::with('problem')->with('attachment')->find($id);
+        return view('admin.sample.insert', compact('problems', 'sample'));
     }
 
     /**
@@ -94,7 +101,8 @@ class SampleController extends Controller
         $rules = [
             "problem_id" => "required|exists:problems,id",
             "input" => "required",
-            "output" => "required"
+            "output" => "required",
+            "attachment" => 'file'
         ];
         $this->validate($request, $rules);
 
@@ -104,6 +112,9 @@ class SampleController extends Controller
         $sample->output = $request->get('output');
         $sample->save();
 
+        if ($request->hasFile('attachment')){
+            $sample->saveFile('attachment');
+        }
         return redirect('/admin/sample');
     }
 

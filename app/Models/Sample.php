@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Sample extends Model
+class Sample extends BaseModel
 {
     protected $fillable = [
         'input', 'output', 'problem_id',

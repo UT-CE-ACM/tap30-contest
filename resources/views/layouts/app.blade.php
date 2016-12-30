@@ -72,6 +72,13 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                    @if(Auth::user()->is_admin)
+                                        <li>
+                                            <a href="/admin">
+                                                Admin Pannel
+                                            </a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </li>
                         @endif

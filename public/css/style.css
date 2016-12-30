@@ -13,3 +13,18 @@ form .form-padding{
 div .padding{
     padding: 3px 15px;
 }
+
+div .attachment-container{
+    padding-top: 8px;
+}
+
+.remove-link {
+    color: darkred;
+    padding-left: 5px;
+}
+
+.inner-attachment-container{
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
