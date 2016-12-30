@@ -1,10 +1,10 @@
-@extends('admin.problem.base')
+@extends('admin.sample.base')
 
 @section('main-content')
-    @if($problem->id == null)
-        <h3>ایجاد سوال جدید</h3>
+    @if($sample->id == null)
+        <h3>ایجاد تست کیس جدید</h3>
     @else
-        <h3>ویرایش سوال</h3>
+        <h3>ویرایش تست کیس</h3>
     @endif
 
     @if (count($errors) > 0)
@@ -16,33 +16,33 @@
             </ul>
         </div>
     @endif
-    @if($problem->id==NULL)
-        {{Form::open(array('url' => '/admin/problem', 'method' => 'post', 'files'=>true , 'class' => 'form-horizontal ls_form'))}}
+    @if($sample->id==NULL)
+        {{Form::open(array('url' => '/admin/sample', 'method' => 'post', 'files'=>true , 'class' => 'form-horizontal ls_form'))}}
     @else
-        {{Form::model($problem, array('url' => '/admin/problem/'. $problem->id, 'method' => 'put' ,'files' => true, 'class' => 'form-horizontal ls_form'))}}
+        {{Form::model($sample, array('url' => '/admin/sample/'. $sample->id, 'method' => 'put' ,'files' => true, 'class' => 'form-horizontal ls_form'))}}
     @endif
     <div class="row ls_divider last">
         <div class="form-group form-padding">
             <div class="row padding">
-                <label class="col-md-2 control-label">عنوان سوال</label>
+                <label class="col-md-2 control-label">سوال مربوطه</label>
                 <div class="col-md-10">
-                    {{ Form::text('title', old('title'), ['placeholder' => 'سوال تپسی', "class" => 'form-control input-lg ls-group-input']) }}
+                    {{ Form::select('problem_id', $problems, null, ["class" => 'form-control']) }}
                 </div>
             </div>
 
             <div class="row padding">
-                <label class="col-md-2 control-label">توضیحات</label>
+                <label class="col-md-2 control-label">ورودی</label>
                 <div class="col-md-10">
-                    {{ Form::textarea('description', old('description'), ['placeholder' => 'توضیحات سوال', "class" => 'form-control', "rows" => 5]) }}
+                    {{ Form::textarea('input', old('input'), ['placeholder' => 'ورودی', "class" => 'form-control', "rows" => 5]) }}
                 </div>
             </div>
 
-            {{--<div class="padding" id="testcase-container"></div>
-
-            <div class="col-md-2 pull-right  top-padding">
-                <button class="btn btn-success btn-block" type="button" id="add-testcase">افزودن تست کیس</button>
+            <div class="row padding">
+                <label class="col-md-2 control-label">خروجی</label>
+                <div class="col-md-10">
+                    {{ Form::textarea('output', old('output'), ['placeholder' => 'خروجی', "class" => 'form-control', "rows" => 5]) }}
+                </div>
             </div>
-            <div class="clearfix"></div>--}}
 
             <div class="col-md-2 pull-right  top-padding">
                 <button class="btn btn-success btn-block" type="submit">ذخیره</button>

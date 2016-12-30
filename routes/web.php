@@ -27,6 +27,7 @@ Route::group(
     ],
     function (){
         Route::resource('problem', 'ProblemController');
+        Route::resource('sample', 'SampleController');
         Route::get('/', function (){
             return view('admin.index');
         });

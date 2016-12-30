@@ -9,3 +9,7 @@ form .form-padding{
 .horizontal {
     display: inline;
 }
+
+div .padding{
+    padding: 3px 15px;
+}

@@ -9,8 +9,8 @@
 
                     <div class="panel-body">
                         <div class="list-group">
-                            <a href="/admin/problem" class="list-group-item @if(Request::segment(2) == 'problem') @endif">سوالات</a>
-                            <a href="/admin/user" class="list-group-item @if(Request::segment(2) == 'user') @endif">تیم ها</a>
+                            <a href="/admin/problem" class="list-group-item @if(Request::segment(2) == 'problem') active @endif">سوالات</a>
+                            <a href="/admin/sample" class="list-group-item @if(Request::segment(2) == 'sample') active @endif">تست کیس ها</a>
                         </div>
                     </div>
                 </div>
