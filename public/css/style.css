@@ -1,0 +1,11 @@
+form .form-padding{
+    padding: 15px;
+}
+
+.top-padding{
+    padding-top: 10px;
+}
+
+.horizontal {
+    display: inline;
+}

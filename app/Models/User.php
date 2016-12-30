@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'password',
+        'name', 'username', 'password', 'is_admin',
     ];
 
     /**
@@ -30,6 +30,7 @@ class User extends Authenticatable
     public function members(){
         return $this->hasMany("\\App\\Models\\Member", "user_id");
     }
+
     public function submits(){
         return $this->hasMany("\\App\\Models\\Submit","user_id");
     }

@@ -29,6 +29,6 @@ class CreateProblemsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('problems');
     }
 }
