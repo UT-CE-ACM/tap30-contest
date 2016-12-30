@@ -26,9 +26,15 @@ Route::group(
         'middleware' => 'admin'
     ],
     function (){
+        // resources routing
         Route::resource('problem', 'ProblemController');
         Route::resource('sample', 'SampleController');
+        Route::resource('user', 'UserController');
+
+        // attachments management
         Route::any('attachment/remove/{id}', 'AttachmentController@remove');
+
+        // admin index view
         Route::get('/', function (){
             return view('admin.index');
         });
