@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('admin.user.index',compact('users'));
     }
 
     /**
@@ -23,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.insert')->with('user', new User());
     }
 
     /**
@@ -34,7 +36,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            "name" => "required",
+            "username" => "required",
+            "password" => "required|confirmed",
+            "password_confirmation" => "required"
+        ];
+        $this->validate($request,$rules);
+        User::create([
+            "name" => $request->get("name"),
+            "username" => $request->get("username"),
+            "password" => bcrypt($request->get("password"))
+        ]);
+        return redirect('admin/user');
     }
 
     /**
@@ -56,7 +70,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.user.insert')->with('user', User::find($id));
     }
 
     /**
@@ -68,7 +82,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            "name" => "required",
+            "username" => "required",
+            "password" =>"confirmed"
+        ];
+        $this->validate($request, $rules);
+
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->username = $request->get('username');
+        if ($request->get('password') > 0) {
+            $user->password = bcrypt($request->get('password'));
+        }
+        $user->save();
+        return redirect('/admin/user');
     }
 
     /**
@@ -79,6 +107,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return back();
     }
 }
