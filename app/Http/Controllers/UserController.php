@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('members')->get();
         return view('admin.user.index',compact('users'));
     }
 
@@ -40,14 +41,28 @@ class UserController extends Controller
             "name" => "required",
             "username" => "required",
             "password" => "required|confirmed",
-            "password_confirmation" => "required"
+            "password_confirmation" => "required",
+            "m1_name" => "required",
+            "m1_email" => "required|email",
+            "m2_name" => "required",
+            "m2_email" => "required|email",
         ];
         $this->validate($request,$rules);
-        User::create([
+        $user = User::create([
             "name" => $request->get("name"),
             "username" => $request->get("username"),
             "password" => bcrypt($request->get("password"))
         ]);
+        Member::create([
+                "name" => $request->get('m1_name'),
+                "email" => $request->get('m1_email'),
+                "user_id" => $user->id
+            ]);
+        Member::create([
+                "name" => $request->get('m2_name'),
+                "email" => $request->get('m2_email'),
+                "user_id" => $user->id
+            ]);
         return redirect('admin/user');
     }
 
@@ -70,7 +85,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.user.insert')->with('user', User::find($id));
+        return view('admin.user.insert')->with('user', User::with('members')->find($id));
     }
 
     /**
@@ -85,7 +100,11 @@ class UserController extends Controller
         $rules = [
             "name" => "required",
             "username" => "required",
-            "password" =>"confirmed"
+            "password" =>"confirmed",
+            "m1_name" => "required",
+            "m1_email" => "required|email",
+            "m2_name" => "required",
+            "m2_email" => "required|email"
         ];
         $this->validate($request, $rules);
 
@@ -96,6 +115,16 @@ class UserController extends Controller
             $user->password = bcrypt($request->get('password'));
         }
         $user->save();
+
+        $counter = 1;
+        foreach ($user->members as $member){
+            $member->name = $request->get('m'.$counter.'_name');
+            $member->email = $request->get('m'.$counter.'_email');
+            $member->save();
+            $counter += 1;
+        }
+
+
         return redirect('/admin/user');
     }
 

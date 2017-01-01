@@ -28,3 +28,6 @@ div .attachment-container{
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+.from-header{
+    padding-right: 20px;
+}

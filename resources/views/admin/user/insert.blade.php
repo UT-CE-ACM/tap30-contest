@@ -24,6 +24,7 @@
     <div class="row ls_divider last">
         <div class="form-group form-padding">
 
+            <h4 class="from-header">مشخصات تیم</h4>
             <div class="row padding">
                 <label class="col-md-2 control-label">نام تیم</label>
                 <div class="col-md-10">
@@ -31,34 +32,53 @@
                 </div>
             </div>
 
-                <div class="row padding">
-                    <label class="col-md-2 control-label"> نام کاربری</label>
-                    <div class="col-md-10">
-                        {{ Form::text('username', old('username'), ['placeholder' => 'نام کاربری', "class" => 'form-control input-lg ls-group-input']) }}
-                    </div>
+            <div class="row padding">
+                <label class="col-md-2 control-label"> نام کاربری</label>
+                <div class="col-md-10">
+                    {{ Form::text('username', old('username'), ['placeholder' => 'نام کاربری', "class" => 'form-control input-lg ls-group-input']) }}
                 </div>
-                    <div class="row padding">
-                        <label class="col-md-2 control-label">کلمه عبور </label>
-                        <div class="col-md-10">
-                            {{ Form::text('password', '', ['autocomplete'=>'off','placeholder' => 'کلمه عبور',"class" => 'form-control input-lg ls-group-input']) }}
-                        </div>
-                    </div>
+            </div>
+            <div class="row padding">
+                <label class="col-md-2 control-label">کلمه عبور </label>
+                <div class="col-md-10">
+                    {{ Form::password('password', ['placeholder' => '***', "class" => 'form-control input-lg ls-group-input']) }}
+                </div>
+            </div>
 
-                    <div class="row padding">
-                        <label class="col-md-2 control-label">تکرار کلمه عبور </label>
-                        <div class="col-md-10">
-                            {{ Form::text('password_confirmation', '', ['autocomplete'=>'off','placeholder' => 'تکرار کلمه عبور', "class" => 'form-control input-lg ls-group-input']) }}
-                        </div>
-                    </div>
+            <div class="row padding">
+                <label class="col-md-2 control-label">تکرار کلمه عبور </label>
+                <div class="col-md-10">
+                    {{ Form::password('password_confirmation', ['placeholder' => '***', "class" => 'form-control input-lg ls-group-input']) }}
+                </div>
+            </div>
 
-
-            {{--<div class="row padding">--}}
-                {{--<label class="col-md-2 control-label">توضیحات</label>--}}
-                {{--<div class="col-md-10">--}}
-                    {{--{{ Form::textarea('description', old('description'), ['placeholder' => 'توضیحات سوال', "class" => 'form-control', "rows" => 5]) }}--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
+            <hr>
+            <h4 class="from-header">مشخصات اعضا</h4>
+            <div class="row padding">
+                <label class="col-md-2 control-label">نام عضو اول</label>
+                <div class="col-md-10">
+                    {{ Form::text('m1_name', ($user->id) ? $user->members[0]->name : old('m1_name'), ['placeholder' => 'علی جعفری', "class" => 'form-control input-lg ls-group-input']) }}
+                </div>
+            </div>
+            <div class="row padding">
+                <label class="col-md-2 control-label">ایمیل عضو اول</label>
+                <div class="col-md-10">
+                    {{ Form::text('m1_email', ($user->id) ? $user->members[0]->email : old('m1_email'), ['placeholder' => 'ali_jafari@gmail.com', "class" => 'form-control input-lg ls-group-input']) }}
+                </div>
+            </div>
+            <hr>
+            <div class="row padding">
+                <label class="col-md-2 control-label">نام عضو دوم</label>
+                <div class="col-md-10">
+                    {{ Form::text('m2_name', ($user->id) ? $user->members[1]->name : old('m2_name'), ['placeholder' => 'مهدی فلاحی', "class" => 'form-control input-lg ls-group-input']) }}
+                </div>
+            </div>
+            <div class="row padding">
+                <label class="col-md-2 control-label">ایمیل عضو دوم</label>
+                <div class="col-md-10">
+                    {{ Form::text('m2_email', ($user->id) ? $user->members[1]->email : old('m2_email'), ['placeholder' => 'mehdi.falahi@gmail.com', "class" => 'form-control input-lg ls-group-input']) }}
+                </div>
+            </div>
             <div class="col-md-2 pull-right  top-padding">
                 <button class="btn btn-success btn-block" type="submit">ذخیره</button>
             </div>
