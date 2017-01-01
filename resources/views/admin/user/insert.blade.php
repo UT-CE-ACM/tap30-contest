@@ -57,26 +57,26 @@
             <div class="row padding">
                 <label class="col-md-2 control-label">نام عضو اول</label>
                 <div class="col-md-10">
-                    {{ Form::text('m1_name', ($user->id) ? $user->members[0]->name : old('m1_name'), ['placeholder' => 'علی جعفری', "class" => 'form-control input-lg ls-group-input']) }}
+                    {{ Form::text('m1_name', ($user->members()->count()) ? $user->members[0]->name : old('m1_name'), ['placeholder' => 'علی جعفری', "class" => 'form-control input-lg ls-group-input']) }}
                 </div>
             </div>
             <div class="row padding">
                 <label class="col-md-2 control-label">ایمیل عضو اول</label>
                 <div class="col-md-10">
-                    {{ Form::text('m1_email', ($user->id) ? $user->members[0]->email : old('m1_email'), ['placeholder' => 'ali_jafari@gmail.com', "class" => 'form-control input-lg ls-group-input']) }}
+                    {{ Form::text('m1_email', ($user->members()->count()) ? $user->members[0]->email : old('m1_email'), ['placeholder' => 'ali_jafari@gmail.com', "class" => 'form-control input-lg ls-group-input']) }}
                 </div>
             </div>
             <hr>
             <div class="row padding">
                 <label class="col-md-2 control-label">نام عضو دوم</label>
                 <div class="col-md-10">
-                    {{ Form::text('m2_name', ($user->id) ? $user->members[1]->name : old('m2_name'), ['placeholder' => 'مهدی فلاحی', "class" => 'form-control input-lg ls-group-input']) }}
+                    {{ Form::text('m2_name', ($user->members()->count()) ? $user->members[1]->name : old('m2_name'), ['placeholder' => 'مهدی فلاحی', "class" => 'form-control input-lg ls-group-input']) }}
                 </div>
             </div>
             <div class="row padding">
                 <label class="col-md-2 control-label">ایمیل عضو دوم</label>
                 <div class="col-md-10">
-                    {{ Form::text('m2_email', ($user->id) ? $user->members[1]->email : old('m2_email'), ['placeholder' => 'mehdi.falahi@gmail.com', "class" => 'form-control input-lg ls-group-input']) }}
+                    {{ Form::text('m2_email', ($user->members()->count()) ? $user->members[1]->email : old('m2_email'), ['placeholder' => 'mehdi.falahi@gmail.com', "class" => 'form-control input-lg ls-group-input']) }}
                 </div>
             </div>
             <div class="col-md-2 pull-right  top-padding">
