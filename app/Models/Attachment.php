@@ -15,6 +15,6 @@ class Attachment extends Model
     }
 
     public function getPath(){
-        return $this->path . '/' . $this->real_path;
+        return '/'. $this->path . '/' . $this->real_name;
     }
 }
