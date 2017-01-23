@@ -12,6 +12,7 @@
                             <a href="/admin/problem" class="list-group-item @if(Request::segment(2) == 'problem') active @endif">سوالات</a>
                             <a href="/admin/sample" class="list-group-item @if(Request::segment(2) == 'sample') active @endif">تست کیس ها</a>
                             <a href="/admin/user" class="list-group-item @if(Request::segment(2) == 'user') active @endif">تیم ها</a>
+                            <a href="/admin/submit" class="list-group-item @if(Request::segment(2) == 'submit') active @endif">فایل های ارسالی</a>
                         </div>
                     </div>
                 </div>

@@ -10,12 +10,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class BaseModel
+ * @package App\Models
+ */
 class BaseModel extends Model
 {
     /*
      * file actions
      */
 
+    /**
+     * @param string $input_name
+     */
     public function saveFile($input_name)
     {
         //save file from input to uploads folder

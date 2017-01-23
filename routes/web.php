@@ -13,6 +13,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+
     return view('welcome');
 });
 
@@ -31,6 +32,7 @@ Route::group(
         Route::resource('problem', 'ProblemController');
         Route::resource('sample', 'SampleController');
         Route::resource('user', 'UserController');
+        Route::resource('submit', 'SubmitController');
 
         // attachments management
         Route::any('attachment/remove/{id}', 'AttachmentController@remove');
