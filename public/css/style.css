@@ -23,6 +23,16 @@ div .attachment-container{
     padding-left: 5px;
 }
 
+.remove-button {
+    background:none!important;
+    border:none;
+    padding:0!important;
+    font: inherit;
+    /*border is optional*/
+    /*border-bottom:1px solid #444;*/
+    cursor: pointer;
+}
+
 .inner-attachment-container{
     padding: 4px 8px;
     border: 1px solid #ddd;

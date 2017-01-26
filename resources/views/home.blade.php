@@ -31,25 +31,43 @@
                             </span>
                         @endif
                     @endforeach
-                    {{ Form::open(array('url'=>"/problem/".$problem->id."/submit", 'files' => true, 'class' => 'form-horizontal')) }}
-                        <div class="form-group">
-                            {{ Form::label('lang', 'زبان مورد نظر', array('class' => 'control-label col-sm-2')) }}
-                            <div class="col-sm-10">
-                                {{ Form::select('lang', $languages, null , ["class" => 'form-control']) }}
+                    <?php $submit = Auth::user()->submits()->with('attachment')->whereProblemId($problem->id)->first() ?>
+                    @if($submit)
+                        <div>
+                            <span>فایل آپلودی:</span>
+                            <div class="inner-attachment-container">
+                                {{ Form::open(array('url' => '/submit/'.$submit->id.'/remove', 'method' => 'delete')) }}
+                                <button type="submit" class="remove-link remove-button">
+                                    <span class="glyphicon glyphicon-remove " aria-hidden="true"></span>
+                                </button>
+                                <a href="{{ $submit->attachment->getPath() }}">
+                                    <span>{{ $submit->attachment->real_name }}</span>
+                                </a>
+                                {{ Form::close() }}
                             </div>
+                            <span>زبان: {{ \App\Models\Submit::$langs[$submit->lang]  }}</span>
                         </div>
-                        <div class="form-group">
-                            {{ Form::label('attachment', 'ارسال پاسخ', array('class' => 'control-label col-sm-2')) }}
-                            <div class="col-sm-10">
-                                {{ Form::file('attachment', ['placeholder' => 'خروجی', "class" => 'form-control']) }}
+                    @else
+                        {{ Form::open(array('url'=>"/problem/".$problem->id."/submit", 'files' => true, 'class' => 'form-horizontal')) }}
+                            <div class="form-group">
+                                {{ Form::label('lang', 'زبان مورد نظر', array('class' => 'control-label col-sm-2')) }}
+                                <div class="col-sm-10">
+                                    {{ Form::select('lang', $languages, null , ["class" => 'form-control']) }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button class="btn btn-success btn-block" type="submit">ذخیره</button>
+                            <div class="form-group">
+                                {{ Form::label('attachment', 'ارسال پاسخ', array('class' => 'control-label col-sm-2')) }}
+                                <div class="col-sm-10">
+                                    {{ Form::file('attachment', ['placeholder' => 'خروجی', "class" => 'form-control']) }}
+                                </div>
                             </div>
-                        </div>
-                    {{ Form::close() }}
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button class="btn btn-success btn-block" type="submit">ذخیره</button>
+                                </div>
+                            </div>
+                        {{ Form::close() }}
+                    @endif
                 </div>
             </div>
             @endforeach

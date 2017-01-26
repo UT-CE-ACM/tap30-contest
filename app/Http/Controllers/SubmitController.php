@@ -110,6 +110,8 @@ class SubmitController extends Controller
     public function destroy($id)
     {
         $submit = Submit::withTrashed()->find($id);
+        if (Auth::user()->id != $submit->user_id and !Auth::user()->is_admin)
+            return response("forbidden");
         if ($submit->trashed()){
             if (request()->has('force_delete'))
                 $submit->forceDelete();

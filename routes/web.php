@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::post('/problem/{id}/submit', 'SubmitController@store');
+Route::delete('/submit/{id}/remove', 'SubmitController@destroy');
 
 Route::group(
     [
