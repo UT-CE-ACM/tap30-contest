@@ -34,6 +34,7 @@ Route::group(
         Route::resource('sample', 'SampleController');
         Route::resource('user', 'UserController');
         Route::resource('submit', 'SubmitController');
+        Route::resource('timer', 'TimerController');
 
         // attachments management
         Route::any('attachment/remove/{id}', 'AttachmentController@remove');

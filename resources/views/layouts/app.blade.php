@@ -14,6 +14,7 @@
     <link href="/css/app.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/bootstrap-rtl.css" rel="stylesheet">
+    @yield('css')
 
     <!-- Scripts -->
     <script>

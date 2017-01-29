@@ -8,6 +8,8 @@
 
 namespace App\Models;
 
+use App\Utils\Jalali\jDate;
+use App\Utils\Validation\DataValidation;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -37,5 +39,20 @@ class BaseModel extends Model
         if ($this->id == Null)
             $this->save();
         $this->attachment()->save($file);
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $parentResponse = parent::toArray();
+        foreach ($parentResponse as $key => $value) {
+            if (DataValidation::validateDate($value)) {
+                $parentResponse[$key . "_jalali"] = jDate::forge($value)->format("Y/m/d H:i");
+            }
+        }
+        $parentResponse['className'] = get_class($this);
+        return $parentResponse;
     }
 }
