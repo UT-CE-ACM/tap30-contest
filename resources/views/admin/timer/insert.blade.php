@@ -2,6 +2,8 @@
 
 @section('css')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/css/jquery.datetimepicker.css">
+    ss
 @endsection
 
 @section('main-content')
@@ -31,14 +33,14 @@
             <div class="row padding">
                 <label class="col-md-2 control-label">زمان شروع</label>
                 <div class="col-md-10">
-                    {{ Form::text('starts_at', old('starts_at'), ['placeholder' => 'ورودی','id' => 'start-date', "class" => 'form-control start-date']) }}
+                    {{ Form::text('starts_at', old('starts_at'), ['placeholder' => 'شروع','id' => 'start-date', "class" => 'form-control start-date']) }}
                 </div>
             </div>
 
             <div class="row padding">
                 <label class="col-md-2 control-label">زمان پایان</label>
                 <div class="col-md-10">
-                    {{ Form::text('ends_at', old('ends_at'), ['placeholder' => 'خروجی','id' => 'end-date' ,"class" => 'form-control end-date']) }}
+                    {{ Form::text('ends_at', old('ends_at'), ['placeholder' => 'پایان','id' => 'end-date' ,"class" => 'form-control end-date']) }}
                 </div>
             </div>
 
@@ -53,14 +55,19 @@
 
 
 @section('js')
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+    {{--<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>--}}
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.datetimepicker.full.js"></script>
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/i18n/jquery-ui-timepicker-addon-i18n.js"></script>--}}
+    {{--<script src="http://www.jsdelivr.com/#!jquery.ui.timepicker.addon"></script>--}}
+
     <script>
         $(function() {
-            $( "#start-date" ).datepicker();
+            $( "#start-date" ).datetimepicker();
         });
         $(function() {
-            $( "#end-date" ).datepicker();
+            $( "#end-date" ).datetimepicker();
         });
     </script>
 @endsection

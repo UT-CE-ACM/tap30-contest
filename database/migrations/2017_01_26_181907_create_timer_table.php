@@ -16,9 +16,8 @@ class CreateTimerTable extends Migration
         Schema::create('timers', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->dateTime('start_at')->nullable()->default(null);
+            $table->dateTime('starts_at')->nullable()->default(null);
             $table->dateTime('ends_at')->nullable()->default(null);
-
             $table->timestamps();
         });
     }

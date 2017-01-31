@@ -13,8 +13,8 @@
             <tbody>
             @foreach($timers as $timer)
                 <tr>
-                    <td>{{ $timer->starts_at_jalali }}</td>
-                    <td>{{ $timer->ends_at_jalali }}</td>
+                    <td>{{ $timer->starts_at }}</td>
+                    <td>{{ $timer->ends_at }}</td>
                     <td>
                         {{ Form::open(array('url' => '/admin/timer/'.$timer->id, 'method' => 'delete', 'class' => 'horizontal'))}}
                         <button type="timer" class="btn btn-danger">
