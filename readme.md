@@ -1,6 +1,6 @@
 # Tap30 Contest
 
-This ptoject has power by UT-ACM on laravel 5.3 framework for tap30 contest! 
+This project has been powered by UT-ACM on laravel 5.3 framework for Tap30 contest! 
 
 ## Project Deployment
 
@@ -27,7 +27,7 @@ php artisan migrate --seed
 
 ---
 
-* Each time you wanted to see the project, build a built-in php server with following command:
+* Each time you want to see the project, build a built-in php server with following command:
 ~~~
 php artisan serve
 ~~~
