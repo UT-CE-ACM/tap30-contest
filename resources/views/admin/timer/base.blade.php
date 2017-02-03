@@ -10,17 +10,17 @@
             </ol>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 @if(\App\Models\Timer::all()->count() == 0)
-                <div class="btn-group" role="group">
-                    <a href="/admin/timer/create">
-                        <button type="button" class="btn btn-info">ایجاد تایمر</button>
-                    </a>
-                </div>
-                {{--@else
                     <div class="btn-group" role="group">
                         <a href="/admin/timer/create">
                             <button type="button" class="btn btn-info">ایجاد تایمر</button>
                         </a>
-                    </div>--}}
+                    </div>
+                @else
+                    <div class="btn-group" role="group">
+                        <a href="/admin/timer">
+                            <button type="button" class="btn btn-info">مشاهده تایمر</button>
+                        </a>
+                    </div>
                 @endif
                 {{--<div class="btn-group" role="group">
                     <a href="/admin/submit/create">

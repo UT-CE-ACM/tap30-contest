@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property User team
  * @property Problem problem
  * @property Attachment attachment
+ * @property Run[] runs
  * @property DateTime created_at
  * @property DateTime updated_at
  * @property DateTime deleted_at
@@ -47,7 +48,8 @@ class Submit extends BaseModel
         "C++ - g++ 9.0",
         "Java - java 1.6",
         "Python - python 2.7",
-        "Python - python 3.5"
+        "Python - python 3.5",
+        "Matlab"
     );
 
     /**
@@ -71,4 +73,10 @@ class Submit extends BaseModel
         return $this->morphOne("\\App\\Models\\Attachment", 'attachable');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function runs(){
+        return $this->hasMany('\\App\\Models\\Run', 'submit_id');
+    }
 }

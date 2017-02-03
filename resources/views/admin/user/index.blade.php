@@ -7,6 +7,7 @@
             <tr>
                 <th>شماره تیم</th>
                 <th>نام تیم</th>
+                <th>وضعیت در مسابقه</th>
                 <th>عملیات</th>
             </tr>
             </thead>
@@ -15,6 +16,17 @@
                 <tr>
                     <th scope="row">{{ $user->id }}</th>
                     <td>{{ $user->name }}</td>
+                    <th>
+                        @if($user->has_lost)
+                            <button class="btn btn-danger" >
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        @else
+                            <button class="btn btn-success" >
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        @endif
+                    </th>
                     <td>
                         {{ Form::open(array('url' => '/admin/user/'.$user->id, 'method' => 'delete', 'class' => 'horizontal'))}}
                         <button type="submit" class="btn btn-danger" >

@@ -13,6 +13,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string password
  * @property string remember_token
  * @property boolean is_admin
+ * @property boolean has_lost
+ * @property Record[] records
  * @property Member[] members
  * @property Submit[] submits
  * @property DateTime created_at
@@ -31,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'password', 'is_admin',
+        'name', 'username', 'password', 'is_admin', 'has_lost'
     ];
 
     /**
@@ -55,5 +57,22 @@ class User extends Authenticatable
      */
     public function submits(){
         return $this->hasMany("\\App\\Models\\Submit","user_id");
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function records(){
+        return $this->belongsToMany("\\App\\Models\\Record", "record_user", "user_id", "record_id");
+    }
+
+    /**
+     * Scope a query to only include in competition users.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAllowed($query){
+        return $query->whereIsAdmin(false)->whereHasLost(false);
     }
 }

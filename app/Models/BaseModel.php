@@ -25,7 +25,7 @@ class BaseModel extends Model
     /**
      * @param string $input_name
      */
-    public function saveFile($input_name)
+    public function saveFile($input_name, $hasManyAttachments = false)
     {
         //save file from input to uploads folder
         $filename = request()->file($input_name)->getClientOriginalName();
@@ -38,7 +38,10 @@ class BaseModel extends Model
         $file->real_name = $filename;
         if ($this->id == Null)
             $this->save();
-        $this->attachment()->save($file);
+        if ($hasManyAttachments)
+            $this->attachments()->save($file);
+        else
+            $this->attachment()->save($file);
     }
 
     /**

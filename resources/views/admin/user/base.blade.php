@@ -11,7 +11,7 @@
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
                     <a href="/admin/user">
-                        <button type="button" class="btn btn-info">مشاهده همه تیم ها</button>
+                        <button type="button" class="btn btn-info">مشاهده همه تیم ها ({{ \App\Models\User::all()->count() }} تیم)</button>
                     </a>
                 </div>
                 <div class="btn-group" role="group">
