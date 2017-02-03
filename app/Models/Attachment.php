@@ -41,4 +41,18 @@ class Attachment extends Model
     public function getPath(){
         return '/'. $this->path . '/' . $this->real_name;
     }
+
+    /**
+     * @return string
+     */
+    public function getRelativePath(){
+        return $this->path . '/' . $this->real_name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWholePath(){
+        return storage_path('app/public') . '/' . $this->path;
+    }
 }

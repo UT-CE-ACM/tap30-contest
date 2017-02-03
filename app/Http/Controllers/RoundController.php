@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Record;
 use App\Models\Round;
 use App\Models\User;
+use App\Utils\Submissions\RunSubmission;
 use Illuminate\Http\Request;
 
 class RoundController extends Controller
@@ -104,7 +105,7 @@ class RoundController extends Controller
      */
     public function update(Request $request, Round $round)
     {
-        $round->load(['test_cases', 'records.teams.submits']);
+        $round->load(['test_cases', 'records.teams.submits.language']);
         if ($round->test_cases()->count() == 0){
             die("There is no test case to run the round!!");
         }
@@ -112,9 +113,7 @@ class RoundController extends Controller
         // running the rounds
         foreach ($round->records as $record){
             foreach ($record->teams as $team){
-                foreach ($round->test_cases as $test_case){
-
-                }
+                RunSubmission::handle($team, $round);
             }
         }
     }

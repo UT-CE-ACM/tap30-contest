@@ -27,6 +27,14 @@ php artisan migrate --seed
 
 ---
 
+* For using this judge, you will need mbox package for sand-boxing. You can install it with following commands:
+~~~
+$ wget http://pdos.csail.mit.edu/mbox/mbox-latest-amd64.deb
+$ sudo dpkg -i mbox-latest-amd64.deb
+~~~
+
+---
+
 * Each time you want to see the project, build a built-in php server with following command:
 ~~~
 php artisan serve
