@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Submit;
 use Illuminate\Http\Request;
+use App\Models\Language;
 
 class HomeController extends Controller
 {
@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $languages = Submit::$langs;
+        $languages = Language::listLanguages();
         return view('home', compact('languages'));
     }
 }

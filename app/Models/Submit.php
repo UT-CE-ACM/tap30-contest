@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property integer id
- * @property string lang
+ * @property integer language_id
+ * @property Language language
  * @property integer user_id
  * @property integer problem_id
  * @property User team
@@ -52,11 +53,15 @@ class Submit extends BaseModel
         "Matlab"
     );
 
+    public function language(){
+        return $this->belongsTo("\\App\\Models\\Language", "language_id");
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function problem(){
-        return $this->belongsTo("\\App\\Models\\Problem","problem_id");
+        return $this->belongsTo("\\App\\Models\\Problem", "problem_id");
     }
 
     /**

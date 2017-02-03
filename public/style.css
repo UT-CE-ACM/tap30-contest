@@ -1,0 +1,115 @@
+body {
+	background: #eee;
+	font-family: sans-serif;
+}
+a {
+	text-decoration: none;
+}
+table#knockout-table td {
+	padding: 10px 20px;
+	position: relative;
+}
+table#knockout-table span.team-name {
+	background: #fff;
+	border-radius: 4px;
+	padding: 10px;
+	margin: 0;
+	display: block;
+	border-left: 5px solid #ccc;
+	min-width: 250px;
+	position: relative;
+}
+table#knockout-table span.team-1 {
+	background: #fff;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom: 1px dashed #ccc;
+}
+table#knockout-table span.team-2 {
+	background: #f5f5f5;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	box-shadow: 0 4px 6px -4px #aaa;
+}
+table#knockout-table span.loser {
+	border-left-color: #F44336;
+	color: rgb(183, 28, 28);
+	background: #ffeae9;
+	background: -webkit-gradient(left top, right top, color-stop(0%, #ffeae9), color-stop(50%, #ffffff), color-stop(100%, #ffffff));
+	background: -webkit-linear-gradient(left, #ffeae9 0%, #ffffff 50%, #ffffff 100%);
+	background: linear-gradient(to right, #ffeae9 0%, #ffffff 50%, #ffffff 100%);
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffeae9', endColorstr='#ffffff', GradientType=1);
+	text-decoration: line-through;
+}
+table#knockout-table span.winner {
+	border-left-color: #00b621;
+	color: #1B5E20;
+	font-weight: bold;
+	background: #e9ffe9;
+	background: -webkit-gradient(left top, right top, color-stop(0%, #e9ffe9), color-stop(50%, #ffffff), color-stop(100%, #ffffff));
+	background: -webkit-linear-gradient(left, #e9ffe9 0%, #ffffff 50%, #ffffff 100%);
+	background: linear-gradient(to right, #e9ffe9 0%, #ffffff 50%, #ffffff 100%);
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#e9ffe9', endColorstr='#ffffff', GradientType=1);
+}
+table#knockout-table td:before {
+	position: absolute;
+	content: "";
+	height: 4px;
+	background: #ccc;
+	top: 50%;
+	margin-top: -2px;
+	left: -2px;
+	right: 0;
+}
+table#knockout-table tr:first-child td:last-child:before {
+	right: 50px;
+}
+table#knockout-table tr td:first-child:before {
+	left: 50px;
+}
+table#knockout-table td:after {
+	position: absolute;
+	content: "";
+	top: 50%;
+	right: 0;
+	width: 4px;
+	background: #ccc;
+	bottom: -50%;
+}
+table#knockout-table tr:nth-child(2n) td:after, table#knockout-table tr:nth-child(4n+3) td:nth-child(2):after, table#knockout-table tr:nth-child(8n+5) td:nth-child(3):after, table#knockout-table tr:nth-child(16n+9) td:nth-child(4):after, table#knockout-table tr:first-child td:last-child:after {
+    display: none;
+}
+table#knockout-table a.show-result {
+	display: none;
+	position: absolute;
+	top: 50%;
+	height: 20px;
+	background: #FF9800;
+	border: none;
+	margin-top: -14px;
+	right: 35px;
+	outline: none;
+	cursor: pointer;
+	padding: 5px 10px;
+	color: #fff;
+	border-radius: 3px;
+}
+table#knockout-table .comp-done a.show-result {
+	display: initial;
+}
+table#knockout-table a.show-result {
+	border-radius: 100px;
+	background: #fff;
+	color: #c57500;
+	box-shadow: inset 0 1px rgba(255, 152, 0, 0.15), inset 0 0 6px rgba(255, 152, 0, 0.32), 0 2px rgba(178, 106, 0, 0.71), 0 1px 0 3px #eee, 0 1px 0px 5px #e0e0e0;
+	font-weight: bold;
+}
+table#knockout-table a.show-result:hover {
+	background: #fffaf4;
+	box-shadow: inset 0 1px rgba(255, 152, 0, 0.15), inset 0 0 6px rgba(255, 152, 0, 0.32), 0 2px rgba(178, 106, 0, 0.71), 0 1px 7px rgba(255, 152, 0, 0.5), 0 1px 0 3px #eee, 0 1px 0px 5px #e0e0e0;
+}
+table#knockout-table a.show-result:active {
+	background: #e6e4e1;
+	box-shadow: inset 0 1px 3px #baa994, 0 0px 0 3px #eee, 0 0px 0px 5px #e0e0e0;
+	color: #868686;
+}

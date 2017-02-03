@@ -37,7 +37,7 @@
             <div class="form-group">
                 {{ Form::label('lang', 'زبان مورد نظر', array('class' => 'control-label col-sm-2')) }}
                 <div class="col-sm-10">
-                    {{ Form::select('lang', \App\Models\Submit::$langs, null , ["class" => 'form-control']) }}
+                    {{ Form::select('lang', \App\Models\Language::listLanguages(), null , ["class" => 'form-control']) }}
                 </div>
             </div>
 

@@ -41,7 +41,7 @@ class SubmitController extends Controller
     public function store(Request $request, $id)
     {
         $rules = [
-            "lang" => "required|integer|between:0,".(count(Submit::$langs)-1),
+            "lang" => "required|exists:languages,id",
             "attachment" => 'required|file',
         ];
         $this->validate($request, $rules);
@@ -49,7 +49,7 @@ class SubmitController extends Controller
         $submit = Submit::create([
             "user_id" => Auth::user()->id,
             "problem_id" => $id,
-            "lang" => $request->get('lang'),
+            "language_id" => $request->get('lang'),
         ]);
 
         $submit->saveFile('attachment');
@@ -76,7 +76,7 @@ class SubmitController extends Controller
      */
     public function edit($id)
     {
-        $submit = Submit::with('team')->with('problem')->with('attachment')->find($id);
+        $submit = Submit::with(['problem', 'language', 'attachment', 'team'])->find($id);
         return view('admin.submit.insert', compact('submit'));
     }
 
@@ -90,13 +90,13 @@ class SubmitController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            "lang" => "required|integer|between:0,".(count(Submit::$langs)-1),
+            "lang" => "required|exists:languages,id",
             "attachment" => 'file',
         ];
         $this->validate($request, $rules);
 
         $submit = Submit::find($id);
-        $submit->lang = $request->get('lang');
+        $submit->language_id = $request->get('lang');
         $submit->save();
 
         if ($request->hasFile('attachment')){

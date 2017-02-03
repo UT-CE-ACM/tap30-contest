@@ -31,7 +31,7 @@
                             </span>
                         @endif
                     @endforeach
-                    <?php $submit = Auth::user()->submits()->with('attachment')->whereProblemId($problem->id)->first() ?>
+                    <?php $submit = Auth::user()->submits()->with(['attachment', 'language'])->whereProblemId($problem->id)->first() ?>
                     @if($submit)
                         <div>
                             <span>فایل آپلودی:</span>
@@ -45,7 +45,7 @@
                                 </a>
                                 {{ Form::close() }}
                             </div>
-                            <span>زبان: {{ \App\Models\Submit::$langs[$submit->lang]  }}</span>
+                            <span>زبان: {{ $submit->language->name . ' - ' . $submit->language->version }}</span>
                         </div>
                     @else
                         {{ Form::open(array('url'=>"/problem/".$problem->id."/submit", 'files' => true, 'class' => 'form-horizontal')) }}
