@@ -13,16 +13,16 @@
             <tbody>
             @foreach($timers as $timer)
                 <tr>
-                    <td>{{ $timer->starts_at }}</td>
-                    <td>{{ $timer->ends_at }}</td>
+                    <td>{{ $timer["starts_at_jalali"] }}</td>
+                    <td>{{ $timer["ends_at_jalali"] }}</td>
                     <td>
-                        {{ Form::open(array('url' => '/admin/timer/'.$timer->id, 'method' => 'delete', 'class' => 'horizontal'))}}
-                        <button type="timer" class="btn btn-danger">
+                        {{ Form::open(array('url' => '/admin/timer/'.$timer["id"], 'method' => 'delete', 'class' => 'horizontal'))}}
+                        <button type="submit" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
                         {{Form::close()}}
-                        {{Form::open(array('url' => '/admin/timer/'.$timer->id.'/edit', 'method' => 'get', 'class' => 'horizontal'))}}
-                        <button type="timer" class="btn btn-info" >
+                        {{Form::open(array('url' => '/admin/timer/'.$timer["id"].'/edit', 'method' => 'get', 'class' => 'horizontal'))}}
+                        <button type="submit" class="btn btn-info" >
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                         {{Form::close()}}

@@ -30,20 +30,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function (){
-    try
-    {
-        foreach(\App\Models\Attachment::all() as $a) {
-            echo File::get($a->getRelativePath());
-            echo "<br><br>";
-        }
-    }
-    catch (Exception $exception)
-    {
-        die("The file doesn't exist");
-    }
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
