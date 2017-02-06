@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Record;
+use App\Models\Round;
 use Illuminate\Http\Request;
 
 class RecordController extends Controller
@@ -14,7 +15,13 @@ class RecordController extends Controller
      */
     public function index()
     {
-        //
+        if (request()->has('round_id')){
+            $round = Round::find(request()->get('round_id'));
+            $records = $round->records;
+            $records->load(['teams', 'winner']);
+            return $records;
+            return view('admin.record.index');
+        }
     }
 
     /**
@@ -41,7 +48,7 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Record  $record
+     * @param  \App\Models\Record  $record
      * @return \Illuminate\Http\Response
      */
     public function show(Record $record)
@@ -52,7 +59,7 @@ class RecordController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Record  $record
+     * @param  \App\Models\Record  $record
      * @return \Illuminate\Http\Response
      */
     public function edit(Record $record)
@@ -64,7 +71,7 @@ class RecordController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Record  $record
+     * @param  \App\Models\Record  $record
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Record $record)
@@ -75,7 +82,7 @@ class RecordController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Record  $record
+     * @param  \App\Models\Record  $record
      * @return \Illuminate\Http\Response
      */
     public function destroy(Record $record)

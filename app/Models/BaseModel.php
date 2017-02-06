@@ -47,7 +47,7 @@ class BaseModel extends Model
     /**
      * @return array
      */
-    public function toArray()
+    /*public function toArray()
     {
         $parentResponse = parent::toArray();
         foreach ($parentResponse as $key => $value) {
@@ -57,5 +57,5 @@ class BaseModel extends Model
         }
         $parentResponse['className'] = get_class($this);
         return $parentResponse;
-    }
+    }*/
 }

@@ -14,7 +14,7 @@ class TimerController extends Controller
      */
     public function index()
     {
-        return view('admin.timer.index')->with('timers', Timer::all()->toArray());
+        return view('admin.timer.index')->with('timers', Timer::all());
     }
 
     /**

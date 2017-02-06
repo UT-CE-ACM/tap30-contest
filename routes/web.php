@@ -50,6 +50,7 @@ Route::group(
         Route::resource('timer', 'TimerController');
         Route::resource('round', 'RoundController');
         Route::resource('test-case', 'TestCaseController');
+        Route::resource('record', 'RecordController');
 
         // attachments management
         Route::any('attachment/remove/{id}', 'AttachmentController@remove');

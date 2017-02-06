@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\Jalali\jDate;
 use Faker\Provider\DateTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,6 +27,13 @@ class Timer extends BaseModel
     protected $guarded = [];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = array('starts_at_jalali', 'ends_at_jalali');
+
+    /**
      * @param Builder $query
      * @return Builder
      */
@@ -41,5 +49,19 @@ class Timer extends BaseModel
         if(Timer::allowed()->get()->isEmpty())
             return false;
         return true;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getStartsAtJalaliAttribute(){
+        return jDate::forge($this->starts_at)->format("Y/m/d H:i");
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getEndsAtJalaliAttribute(){
+        return jDate::forge($this->ends_at)->format("Y/m/d H:i");
     }
 }
