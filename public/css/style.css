@@ -1,43 +1,91 @@
-form .form-padding{
-    padding: 15px;
+@font-face {
+	font-family: 'IRANsans';
+	src: url(/fonts/IRANSans.woff) format('woff'), url(/fonts/IRANSans.ttf) format('truetype')
 }
-
-.top-padding{
-    padding-top: 10px;
+@font-face {
+	font-family: 'IRANsans-b';
+	src: url(/fonts/IRANSans-B.woff) format('woff'), url(/fonts/IRANSans-B.ttf) format('truetype')
 }
-
+body {
+	font-family: IRANsans, tahoma, sans-serif;
+	font-size: 16px;
+}
+form .form-padding {
+	padding: 15px;
+}
+.top-padding {
+	padding-top: 10px;
+}
 .horizontal {
-    display: inline;
+	display: inline;
 }
-
-div .padding{
-    padding: 3px 15px;
+div .padding {
+	padding: 3px 15px;
 }
-
-div .attachment-container{
-    padding-top: 8px;
+div .attachment-container {
+	padding-top: 8px;
 }
-
 .remove-link {
-    color: darkred;
-    padding-left: 5px;
+	color: darkred;
+	padding-left: 5px;
 }
-
 .remove-button {
-    background:none!important;
-    border:none;
-    padding:0!important;
-    font: inherit;
-    /*border is optional*/
-    /*border-bottom:1px solid #444;*/
-    cursor: pointer;
+	background: none!important;
+	border: none;
+	padding: 0!important;
+	font: inherit;
+	/*border is optional*/
+	/*border-bottom:1px solid #444;*/
+	cursor: pointer;
+}
+.inner-attachment-container {
+	padding: 4px 8px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+.from-header {
+	padding-right: 20px;
 }
 
-.inner-attachment-container{
-    padding: 4px 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+/* vahid */
+
+pre {
+	margin: 15px 0;
+	border: none;
+	border-right: 5px solid #ddd;
+	border-radius: 0;
 }
-.from-header{
-    padding-right: 20px;
+.panel-default {
+	border: none;
+	box-shadow: 0 5px 60px rgba(0, 0, 0, 0.2);
+	margin: 50px 0;
+	border-radius: 1px;
+}
+.panel-body {
+	padding: 25px;
+	color: #000;
+}
+.panel-default>.panel-heading {
+	padding: 15px 20px;
+	border-bottom: 2px solid #234e6a;
+	background: #396887;
+	color: #fff;
+	text-shadow: 0 1px #000;
+	font-weight: bold;
+	font-size: 18px;
+}
+form.answer-form {
+	padding: 30px 20px 10px;
+	border-top: 3px dashed #396887;
+	margin-top: 30px;
+	background: #f9f9f9;
+}
+.form-control {
+	border-radius: 0;
+	box-shadow: none;
+	border: 2px solid #ddd;
+}
+.btn {
+	border-radius: 0;
+	border: none;
 }
