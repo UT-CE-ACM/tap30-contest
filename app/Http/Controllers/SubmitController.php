@@ -90,13 +90,13 @@ class SubmitController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            "lang" => "required|exists:languages,id",
+            "language_id" => "required|exists:languages,id",
             "attachment" => 'file',
         ];
         $this->validate($request, $rules);
 
         $submit = Submit::find($id);
-        $submit->language_id = $request->get('lang');
+        $submit->language_id = $request->get('language_id');
         $submit->save();
 
         if ($request->hasFile('attachment')){

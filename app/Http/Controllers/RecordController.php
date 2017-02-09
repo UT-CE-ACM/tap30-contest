@@ -19,8 +19,7 @@ class RecordController extends Controller
             $round = Round::find(request()->get('round_id'));
             $records = $round->records;
             $records->load(['teams', 'winner']);
-            return $records;
-            return view('admin.record.index');
+            return view('admin.record.index', compact('records', 'round'));
         }
     }
 
@@ -53,7 +52,13 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
-        //
+        $record->load(['teams.submits', 'winner', 'round' ]);
+        $round = $record->round;
+        $runs = array();
+        foreach ($record->teams as $team){
+            array_push($runs, $team->submits->last()->runs()->with('test-case')->whereRoundId($round->id)->get());
+        }
+        return view('admin.record.view', compact('runs', 'round', 'record'));
     }
 
     /**

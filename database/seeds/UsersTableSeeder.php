@@ -24,8 +24,26 @@ class UsersTableSeeder extends Seeder
                 "is_admin" => true
             ],
             [
-                "name" => "Test User",
-                "username" => "test",
+                "name" => "Test User1",
+                "username" => "test1",
+                "password" => bcrypt("123"),
+                "is_admin" => false
+            ],
+            [
+                "name" => "Test User2",
+                "username" => "test2",
+                "password" => bcrypt("123"),
+                "is_admin" => false
+            ],
+            [
+                "name" => "Test User3",
+                "username" => "test3",
+                "password" => bcrypt("123"),
+                "is_admin" => false
+            ],
+            [
+                "name" => "Test User4",
+                "username" => "test4",
                 "password" => bcrypt("123"),
                 "is_admin" => false
             ]
