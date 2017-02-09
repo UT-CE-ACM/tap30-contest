@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @if (count($errors) > 0)
@@ -48,7 +48,7 @@
                             <span>زبان: {{ $submit->language->name . ' - ' . $submit->language->version }}</span>
                         </div>
                     @else
-                        {{ Form::open(array('url'=>"/problem/".$problem->id."/submit", 'files' => true, 'class' => 'form-horizontal')) }}
+                        {{ Form::open(array('url'=>"/problem/".$problem->id."/submit", 'files' => true, 'class' => 'form-horizontal answer-form')) }}
                             <div class="form-group">
                                 {{ Form::label('lang', 'زبان مورد نظر', array('class' => 'control-label col-sm-2')) }}
                                 <div class="col-sm-10">
