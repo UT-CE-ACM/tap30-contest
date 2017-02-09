@@ -26,15 +26,15 @@
 نمونه خروجی {{ $loop->iteration }}
                         <pre>{{ $sample->output }}</pre>
                         @if($sample->attachment)
-                            <span>فایل پیوست :
+                            <p>فایل پیوست :
                                 <a href="{{ $sample->attachment->getPath() }}">{{ $sample->attachment->real_name }}</a>
-                            </span>
+                            </p>
                         @endif
                     @endforeach
                     <?php $submit = Auth::user()->submits()->with(['attachment', 'language'])->whereProblemId($problem->id)->first() ?>
                     @if($submit)
-                        <div>
-                            <span>فایل آپلودی:</span>
+                        <div class="user-uploaded-file">
+                            <p>فایل آپلودی:</p>
                             <div class="inner-attachment-container">
                                 {{ Form::open(array('url' => '/submit/'.$submit->id.'/remove', 'method' => 'delete')) }}
                                 <button type="submit" class="remove-link remove-button">
@@ -45,7 +45,7 @@
                                 </a>
                                 {{ Form::close() }}
                             </div>
-                            <span>زبان: {{ $submit->language->name . ' - ' . $submit->language->version }}</span>
+                            <p>زبان: {{ $submit->language->name . ' - ' . $submit->language->version }}</p>
                         </div>
                     @else
                         {{ Form::open(array('url'=>"/problem/".$problem->id."/submit", 'files' => true, 'class' => 'form-horizontal answer-form')) }}
