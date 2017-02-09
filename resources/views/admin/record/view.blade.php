@@ -15,30 +15,33 @@
     <div class="row ls_divider last">
         <div class="form-group form-padding">
             @foreach($record->teams as $team)
-                <div class="padding col-md-6">
-                    <label class="col-md-2 control-label">نام تیم</label>
-                    <div class="col-md-10">{{ $team->name }}</div>
-                </div>
-                <div class="padding col-md-6">
-                    <label class="col-md-2 control-label">فایل آپلودی</label>
-                    <a href="{{ $attachment->getPath() }}">
-                        <span>{{ $attachment->real_name }}</span>
+                <div class="padding col-md-12">
+                    <label class="col-md-6 control-label"> فایل آپلودی تیم {{$team->name}}</label>
+                    <a href="{{ $team->submits->last()->attachment->getPath() }}">
+                        <span>{{ $team->submits->last()->attachment->real_name }}</span>
                     </a>
                 </div>
+            @endforeach
                 <hr>
+                <hr>
+                <hr>
+                <hr>
+                <hr>
+            <div class="padding">
                 <lable>تست کیس ها</lable>
                 <table class="table">
                     <thead>
                     <tr>
                         <th>ورودی</th>
                         <th>خروجی</th>
-                        <th>نتیجه</th>
+                        <th>نتیجه تیم {{$record->teams->first()->name}}</th>
+                        <th>نتیجه تیم {{$record->teams->last()->name}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($runs[$loop->index] as $run)
+                    @foreach($round->test_cases as $test_case)
                         <tr>
-                            @foreach($run->$test_case->attachments as $attachment)
+                            @foreach($test_case->attachments as $attachment)
                                 <td>
                                     <div class="inner-attachment-container">
                                         <a href="{{ $attachment->getPath() }}">
@@ -48,14 +51,16 @@
                                 </td>
                             @endforeach
                             <td>
-                                {{ $run->RMSE }}
+                                {{ $runs[0][$loop->index]->RMSE }}
+                            </td>
+                            <td>
+                                {{ $runs[1][$loop->index]->RMSE }}
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-                <hr>
-            @endforeach
+            </div>
         </div>
     </div>
 

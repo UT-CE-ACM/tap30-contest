@@ -56,7 +56,7 @@ class RecordController extends Controller
         $round = $record->round;
         $runs = array();
         foreach ($record->teams as $team){
-            array_push($runs, $team->submits->last()->runs()->with('test-case')->whereRoundId($round->id)->get());
+            array_push($runs, $team->submits->last()->runs()->with('test_case')->whereRoundId($round->id)->get());
         }
         return view('admin.record.view', compact('runs', 'round', 'record'));
     }
