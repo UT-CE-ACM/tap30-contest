@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Timer;
 use Illuminate\Http\Request;
 use App\Models\Language;
 
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('landing');
     }
 
     /**
