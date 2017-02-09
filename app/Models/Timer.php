@@ -39,7 +39,7 @@ class Timer extends BaseModel
      */
     public function scopeAllowed($query){
         $now = date("Y-m-d H:i:s");
-        return $query->whereDate('starts_at', '>=', $now)->whereDate('ends_at', '<=', $now);
+        return $query->where('starts_at', '<=', $now)->where('ends_at', '>=', $now);
     }
 
     /**
@@ -47,6 +47,13 @@ class Timer extends BaseModel
      */
     public static function hasActiveContest(){
         if(Timer::allowed()->get()->isEmpty())
+            return false;
+        return true;
+    }
+
+    public static function isItAfterContest(){
+        $now = date("Y-m-d H:i:s");
+        if (Timer::where('ends_at', '<=', $now)->get()->isEmpty())
             return false;
         return true;
     }
