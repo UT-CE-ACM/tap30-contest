@@ -22,6 +22,14 @@
                     </a>
                 </div>
             @endforeach
+            @if($round->attachment)
+                <div class="padding col-md-12">
+                    <label class="col-md-6 control-label">فایل دیتای مرحله</label>
+                    <a href="{{ $round->attachment->getPath() }}">
+                        <span>{{ $round->attachment->real_name }}</span>
+                    </a>
+                </div>
+            @endif
                 <hr>
                 <hr>
                 <hr>
@@ -36,8 +44,8 @@
                         <th>خروجی</th>
                         <th>وضعیت تیم اول</th>
                         <th>وضعیت تیم دوم</th>
-                        <th>نتیجه تیم اول</th>
-                        <th>نتیجه تیم دوم</th>
+                        <th>RMSE تیم اول</th>
+                        <th>RMSE تیم دوم</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -45,7 +53,7 @@
                         <tr>
                             @foreach($test_case->attachments as $attachment)
                                 <td>
-                                    <div class="inner-attachment-container">
+                                    <div class="">
                                         <a href="{{ $attachment->getPath() }}">
                                             <span>{{ $attachment->real_name }}</span>
                                         </a>
@@ -68,6 +76,14 @@
                         </tr>
                     @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" style="text-align: center">مجموع RMSE ها</td>
+                            @foreach($record->teams as $team)
+                                <td>{{ \App\Utils\Submissions\RunSubmission::finalScore($team, $round) }}</td>
+                            @endforeach
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
