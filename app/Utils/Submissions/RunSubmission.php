@@ -32,8 +32,9 @@ class RunSubmission
     }
 
     public static function getRMSE($output, $answer){
-        $output = explode("\n",$output);
-        $answer = explode("\n",$answer);
+        $output = explode("\n", trim($output));
+        $answer = explode("\n", trim($answer));
+
         $result = 0.0;
         foreach($output as $key => $value){
             $result += pow((double)$value - (double)$answer[$key],2);
@@ -79,14 +80,14 @@ class RunSubmission
             return;
         }
 
-        // Compile the code (if we need to).
+        // Compile the code (if we need to)
         if ($language->compile_command) {
             $process = new Process(RunSubmission::contextify('mbox -n -i -r {{ tmp_directory }} -C {{ tmp_directory }} -- ' . $language->compile_command, $context));
             $process->run();
             if (!$process->isSuccessful()) {
-                abort(500, $process->getErrorOutput());
+                $status = 'CE';
+                $compileErrorMessage = $process->getErrorOutput();
                 //$this->submission->verdict = 'CE';
-                return;
             }
         }
 
@@ -98,11 +99,19 @@ class RunSubmission
             $test_case->load('attachments');
             $tcInput = File::get($test_case->attachments->first()->getRelativePath());
             $tcOutput = File::get($test_case->attachments->last()->getRelativePath());
-
             $run = new Run;
             $run->round_id = $round->id;
             $run->submit_id = $submit->id;
             $run->test_case_id = $test_case->id;
+
+            if ($status == 'CE'){
+                // Compile Error Exception
+                $run->status = $status;
+                $run->message = $compileErrorMessage;
+                $run->RMSE = -1;
+                $run->save();
+                continue;
+            }
 
             $process = new Process($execute_command);
             $process->setInput($tcInput);
@@ -111,16 +120,26 @@ class RunSubmission
             try {
                 $process->run();
             }catch (RuntimeException $e){
-
+                // Time Limit Exception
+                $run->status = 'TL';
+                $run->message = $e->getMessage();
+                $run->RMSE = -1;
+                $run->save();
+                continue;
             }
             if (!$process->isSuccessful()) {
-                //$this->submission->verdict_id = 'RE';
+                // Runtime Error Exception
+                $run->status = 'RE';
+                $run->message = $process->getErrorOutput();;
+                $run->RMSE = -1;
+                $run->save();
                 continue;
             }
             $output = $process->getOutput();
 
             // evaluating result of test case
             $run->RMSE = RunSubmission::getRMSE($output, $tcOutput);
+            $run->status = 'AC';
 
             $run->save();
         }
