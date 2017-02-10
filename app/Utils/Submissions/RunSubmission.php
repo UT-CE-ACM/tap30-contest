@@ -108,7 +108,7 @@ class RunSubmission
                 // Compile Error Exception
                 $run->status = $status;
                 $run->message = $compileErrorMessage;
-                $run->RMSE = -1;
+                $run->RMSE = 1000;
                 $run->save();
                 continue;
             }
@@ -123,7 +123,7 @@ class RunSubmission
                 // Time Limit Exception
                 $run->status = 'TL';
                 $run->message = $e->getMessage();
-                $run->RMSE = -1;
+                $run->RMSE = 900;
                 $run->save();
                 continue;
             }
@@ -131,7 +131,7 @@ class RunSubmission
                 // Runtime Error Exception
                 $run->status = 'RE';
                 $run->message = $process->getErrorOutput();;
-                $run->RMSE = -1;
+                $run->RMSE = 1000;
                 $run->save();
                 continue;
             }
