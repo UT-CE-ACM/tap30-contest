@@ -1,0 +1,76 @@
+html, body {
+	height: 100%;
+}
+html {
+	background-image: url('../img/back.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+body {
+	background-color: rgba(18, 25, 32, 0.6);
+	/* background-image: url('../img/pattern.png'); */
+	background-position: center;
+	background-repeat: repeat;
+}
+.countdown-container {
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	transform: translateY(-50%);
+	margin-top: 25px;
+	padding: 0;
+	right: 0;
+	left: 0;
+}
+.clock-item .inner {
+	height: 0px;
+	padding-bottom: 100%;
+	position: relative;
+	width: 100%;
+}
+.clock-canvas {
+	background-color: rgba(255, 255, 255, .2);
+	border-radius: 100%;
+	height: 0px;
+	padding-bottom: 100%;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+.text {
+	color: #fff;
+	font-size: 30px;
+	font-weight: bold;
+	margin-top: -50px;
+	position: absolute;
+	top: 50%;
+	text-align: center;
+	text-shadow: 0 1px 1px #000, 0 1px 10px rgba(0, 0, 0, 0.5), 0 1px 30px rgba(0, 0, 0, 0.4);
+	width: 100%;
+}
+.text .val {
+	font-size: 50px;
+}
+.text .type-time {
+	font-size: 20px;
+}
+
+/* Vahid */
+
+.navbar-default {
+	background: rgba(44, 62, 80, 0.6);
+	border-color: rgba(255, 255, 255, 0.4);
+}
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-text:hover {
+	color: #fff;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	.clock-item {
+		margin-bottom: 30px;
+	}
+}
+@media (max-width: 767px) {
+	.clock-item {
+		margin: 0px 30px 30px 30px;
+	}
+}
