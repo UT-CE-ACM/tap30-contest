@@ -129,4 +129,12 @@ class RoundController extends Controller
         $round->delete();
         return back();
     }
+    public function saveDataFile(Request $request, $id){
+        $rules = [
+            "attachment" => 'file | required',
+        ];
+        $this->validate($request, $rules);
+        Round::find($id)->saveFile('attachment');
+        return back();
+    }
 }

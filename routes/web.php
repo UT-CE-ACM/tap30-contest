@@ -58,6 +58,7 @@ Route::group(
 
         // attachments management
         Route::any('attachment/remove/{id}', 'AttachmentController@remove');
+        Route::post('round/{id}/save-data','RoundController@saveDataFile');
 
         // admin index view
         Route::get('/', function (){

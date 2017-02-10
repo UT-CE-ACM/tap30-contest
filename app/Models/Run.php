@@ -7,6 +7,8 @@ use DateTime;
 /**
  * @property integer id
  * @property double RMSE
+ * @property string status
+ * @property string message
  * @property integer round_id
  * @property Round round
  * @property integer submit_id
@@ -27,7 +29,7 @@ class Run extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'RMSE', 'round_id', 'submit_id', 'test_case_id'
+        'RMSE', 'status', 'message', 'round_id', 'submit_id', 'test_case_id'
     ];
 
     /**

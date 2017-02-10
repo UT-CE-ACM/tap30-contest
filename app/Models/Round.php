@@ -50,4 +50,7 @@ class Round extends BaseModel
     public function runs(){
         return $this->hasMany('\\App\\Models\\Run', 'round_id');
     }
+    public function attachment(){
+        return $this->morphOne("\\App\\Models\\Attachment", 'attachable');
+    }
 }

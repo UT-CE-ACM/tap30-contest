@@ -78,11 +78,36 @@
                     {{ Form::file('output', ['placeholder' => 'خروجی', "class" => 'form-control']) }}
                 </div>
             </div>
-
             <div class="col-md-2 pull-right  top-padding">
                 <button class="btn btn-success btn-block" type="submit">ذخیره</button>
             </div>
             {{ Form::close() }}
+            <br>
+            <hr>
+            @if($round->attachment)
+                <div class="inner-attachment-container">
+                    <label class="col-md-2 control-label">فایل دیتا</label>
+                    <a href="{{ $round->attachment->getPath() }}">
+                        <span>{{ $round->attachment->real_name }}</span>
+                    </a>
+                    <a href="/admin/attachment/remove/{{ $round->attachment->id }}" class="remove-link" title="حذف">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </a>
+                </div>
+
+            @else
+                {{Form::open(array('url' => '/admin/round/'.$round->id.'/save-data', 'method' => 'post', 'files'=>true , 'class' => 'form-horizontal ls_form'))}}
+                <div class="row padding">
+                    <label class="col-md-2 control-label">افزودن فایل دیتا</label>
+                    <div class="col-md-10 attachment-container">
+                        {{ Form::file('attachment', ['placeholder' => 'فایل دیتا', "class" => 'form-control']) }}
+                    </div>
+                </div>
+                <div class="col-md-2 pull-right  top-padding">
+                    <button class="btn btn-success btn-block" type="submit">ذخیره</button>
+                </div>
+                {{ Form::close() }}
+            @endif
         </div>
     </div>
 
