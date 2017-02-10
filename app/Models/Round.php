@@ -10,6 +10,7 @@ use DateTime;
  * @property boolean is_finished
  * @property TestCase[] test_cases
  * @property Record[] records
+ * @property Attachment attachment
  * @property Run[] runs
  * @property DateTime created_at
  * @property DateTime updated_at
@@ -50,6 +51,10 @@ class Round extends BaseModel
     public function runs(){
         return $this->hasMany('\\App\\Models\\Run', 'round_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
     public function attachment(){
         return $this->morphOne("\\App\\Models\\Attachment", 'attachable');
     }

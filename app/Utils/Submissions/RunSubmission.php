@@ -43,8 +43,10 @@ class RunSubmission
     }
 
     public static function handle(User $team, Round $round){
+        echo "=======================================================<br>";
         $submit = $team->submits->last();
         $submit->load(['problem', 'attachment']);
+        echo $team->name . ":<br>";
 
         $attachment = $submit->attachment;
         $language = $submit->language;
@@ -52,7 +54,7 @@ class RunSubmission
 
         $time_limit = 5; // seconds
         $memory_limit = 50*1024; // kb
-        $slug = "tap30-problem-".$team->username;
+        $slug = explode(".", $attachment->real_name)[0];
 
         // create unique directory in /tmp
         $process = new Process("mktemp -d");
@@ -61,7 +63,7 @@ class RunSubmission
             return;
         }
         $tmpDirectory = trim($process->getOutput());
-
+        echo "Temp directory " . $tmpDirectory . "has been created!<br>";
 
         $context = [
             'tmp_directory' => $tmpDirectory,
@@ -71,15 +73,26 @@ class RunSubmission
             'memory_limit' => $problem->memory_limit,
         ];
 
-        // Write the code to a file.
-        $address = $context['directory'] . '/' . $attachment->real_name;
+        // Copy submit file to temp directory
+        $source = $context['directory'] . '/' . $attachment->real_name;
         $destination = RunSubmission::contextify('{{ tmp_directory }}/{{ problem_slug }}.{{ file_extension }}', $context);
-        $process = new Process("cp ". $address . " " . $destination);
+        $process = new Process("cp ". $source . " " . $destination);
         $process->run();
         if (!$process->isSuccessful()){
             return;
         }
+        echo "Submit file " . $source . " has been copied to tmp directory!<br>";
 
+        // Copy Round Attachment to tmp directory
+        $source = $round->attachment->getWholePath() . '/' . $round->attachment->real_name;
+        $process = new Process("cp ". $source . " " . $tmpDirectory);
+        $process->run();
+        if (!$process->isSuccessful()){
+            return;
+        }
+        echo "Data file " . $source . " has been copied to tmp directory!<br>";
+
+        $status = '';
         // Compile the code (if we need to)
         if ($language->compile_command) {
             $process = new Process(RunSubmission::contextify('mbox -n -i -r {{ tmp_directory }} -C {{ tmp_directory }} -- ' . $language->compile_command, $context));
@@ -87,18 +100,24 @@ class RunSubmission
             if (!$process->isSuccessful()) {
                 $status = 'CE';
                 $compileErrorMessage = $process->getErrorOutput();
-                //$this->submission->verdict = 'CE';
             }
         }
 
         // Run the compiled executable for each test case.
         $execute_command = RunSubmission::contextify('(ulimit -v ' . $memory_limit . '; mbox -n -i -r {{ tmp_directory }} -C {{ tmp_directory }} -- ' . $language->execute_command . ')', $context);
 
+        $counter = 1;
+        echo "<pre>";
         // giving inputs to the executable file and getting outputs
         foreach ($round->test_cases as $test_case) {
+            echo "Test Case " . $counter++ . ":<br>";
             $test_case->load('attachments');
             $tcInput = File::get($test_case->attachments->first()->getRelativePath());
             $tcOutput = File::get($test_case->attachments->last()->getRelativePath());
+
+            echo "\tRun input: ". $tcInput . "<br>";
+            echo "\tRun output: ". $tcOutput . "<br>";
+
             $run = new Run;
             $run->round_id = $round->id;
             $run->submit_id = $submit->id;
@@ -110,6 +129,8 @@ class RunSubmission
                 $run->message = $compileErrorMessage;
                 $run->RMSE = 1000;
                 $run->save();
+                echo "\t<span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
+                echo "\tMessage: " . $run->message . "<br>";
                 continue;
             }
 
@@ -125,6 +146,8 @@ class RunSubmission
                 $run->message = $e->getMessage();
                 $run->RMSE = 900;
                 $run->save();
+                echo "\t<span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
+                echo "\tMessage: " . $run->message . "<br>";
                 continue;
             }
             if (!$process->isSuccessful()) {
@@ -133,15 +156,21 @@ class RunSubmission
                 $run->message = $process->getErrorOutput();;
                 $run->RMSE = 1000;
                 $run->save();
+                echo "\t<span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
+                echo "\tMessage: " . $run->message . "<br>";
                 continue;
             }
             $output = $process->getOutput();
+            echo "\tUser output: " . trim($output) . "<br>";
 
             // evaluating result of test case
             $run->RMSE = RunSubmission::getRMSE($output, $tcOutput);
             $run->status = 'AC';
-
             $run->save();
+
+            echo "\t<span style='color: green'>Run has been done successfully!</span><br>";
         }
+        echo "</pre>";
+
     }
 }
