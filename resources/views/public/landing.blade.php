@@ -69,12 +69,16 @@
 @section('js')
 	<script src="js/jquery.final-countdown.min.js"></script>
 	<script src="js/kinetic-v5.1.0.min.js"></script>
+    <?php
+    $d = new DateTime(\App\Models\Timer::all()->first()->starts_at);
+    $today = new DateTime();
+    ?>
 	<script>
 		$(document).ready(function() {
 	        $('.countdown').final_countdown({
 	                'start': 0,
-	                'end': 20000,
-	                'now': 1
+	                'end': {{$d->getTimestamp()}},
+	                'now': {{$today->getTimestamp()}}
 	        }, function() {
 	                // Finish Callback
 	        });

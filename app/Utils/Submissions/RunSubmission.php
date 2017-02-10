@@ -17,6 +17,22 @@ use File;
  */
 class RunSubmission
 {
+
+    /**
+     * @param User $team
+     * @param Round $round
+     * @return float
+     */
+    public static function finalScore(User $team, Round $round){
+
+        $result = 0.0;
+        $runs = $team->submits>last()->runs()->whereRoundId($round->id);
+        foreach($runs as $run){
+            $result += $run->RMSE;
+        }
+        return $result;
+    }
+
     /**
      * Replaces {{ var }} substrings in a given string.
      *

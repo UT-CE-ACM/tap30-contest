@@ -115,6 +115,15 @@ class RoundController extends Controller
             foreach ($record->teams as $team){
                 RunSubmission::handle($team, $round);
             }
+            $firstTeamScore = RunSubmission::finalScore($record->teams[0],$round);
+            $secondTeamScore = RunSubmission::finalScore($record->teams[1],$round);
+            if ($secondTeamScore < $firstTeamScore){
+                $record->winner_id = $record->teams[1]->id;
+            }
+            else{
+                $record->winner_id = $record->teams[0]->id;
+            }
+            $record->save();
         }
     }
 
