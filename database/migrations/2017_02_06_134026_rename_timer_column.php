@@ -13,9 +13,9 @@ class RenameTimerColumn extends Migration
      */
     public function up()
     {
-        Schema::table('timers', function (Blueprint $table) {
-            $table->renameColumn('start_at', 'starts_at');
-        });
+//        Schema::table('timers', function (Blueprint $table) {
+//            $table->renameColumn('starts_at', 'starts_at');
+//        });
     }
 
     /**

@@ -31,7 +31,13 @@ class RunSubmission
     }
 
     public static function getRMSE($output, $answer){
-        return 0;
+        $output = explode("\n",$output);
+        $answer = explode("\n",$answer);
+        $result = 0.0;
+        foreach($output as $key => $value){
+            $result += pow((double)$value - (double)$answer[$key],2);
+        }
+        return sqrt($result);
     }
 
     public static function handle(User $team, Round $round){
