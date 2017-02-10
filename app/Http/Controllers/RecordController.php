@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Record;
 use App\Models\Round;
+use App\Utils\Submissions\RunSubmission;
 use Illuminate\Http\Request;
 
 class RecordController extends Controller
@@ -81,9 +82,18 @@ class RecordController extends Controller
      */
     public function update(Request $request, Record $record)
     {
-        /*foreach ($record->teams as $team){
+        $round = $record->round;
+        if ($round->test_cases()->count() == 0){
+            die("There is no test case to run the record!!");
+        }
+        if (!$round->attachment){
+            die("There is no data file to run the record!!");
+        }
+        $record->load(['teams.submits.language']);
+        foreach ($record->teams as $team){
             RunSubmission::handle($team, $round);
-        }*/
+        }
+        RunSubmission::determineWinner($record, $round);
     }
 
     /**

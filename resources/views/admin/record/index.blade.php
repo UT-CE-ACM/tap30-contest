@@ -26,9 +26,14 @@
                         </td>
                     @endforeach
                     <td>
-                        <a href="/admin/record/{{$record->id}}" class="btn btn-primary" title="جزئیات مسابقه">
+                        <a href="/admin/record/{{$record->id}}" class="btn btn-info" title="جزئیات مسابقه">
                             <span class="glyphicon glyphicon-info-sign"></span>
                         </a>
+                        {{Form::open(array('url' => '/admin/record/'.$record->id, 'method' => 'put', 'class' => 'horizontal'))}}
+                        <button type="submit" class="btn btn-warning" >
+                            <span class="glyphicon glyphicon-repeat"></span>
+                        </button>
+                        {{Form::close()}}
                     </td>
                 </tr>
             @endforeach

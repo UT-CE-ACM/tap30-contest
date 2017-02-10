@@ -32,6 +32,10 @@ class Run extends BaseModel
         'RMSE', 'status', 'message', 'round_id', 'submit_id', 'test_case_id'
     ];
 
+    public static $status = [
+        "AC" => "general.accepted"
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

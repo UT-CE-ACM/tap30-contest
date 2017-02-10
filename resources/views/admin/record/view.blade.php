@@ -34,8 +34,10 @@
                     <tr>
                         <th>ورودی</th>
                         <th>خروجی</th>
-                        <th>نتیجه تیم {{$record->teams->first()->name}}</th>
-                        <th>نتیجه تیم {{$record->teams->last()->name}}</th>
+                        <th>وضعیت تیم اول</th>
+                        <th>وضعیت تیم دوم</th>
+                        <th>نتیجه تیم اول</th>
+                        <th>نتیجه تیم دوم</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,12 +52,19 @@
                                     </div>
                                 </td>
                             @endforeach
+                            <?php $usersRun = [$runs[0][$loop->index], $runs[1][$loop->index]]; ?>
+                            @foreach($usersRun as $userRun)
                             <td>
-                                {{ $runs[0][$loop->index]->RMSE }}
+                                <span style="color: {{ $userRun->status == 'AC' ? 'green' : 'red'}}" title="{{ $userRun->message }}">
+                                    {{ trans('general.'.$userRun->status, [], null, 'en') }}
+                                </span>
                             </td>
-                            <td>
-                                {{ $runs[1][$loop->index]->RMSE }}
-                            </td>
+                            @endforeach
+                            @foreach($usersRun as $userRun)
+                                <td>
+                                    {{ $userRun->RMSE }}
+                                </td>
+                            @endforeach
                         </tr>
                     @endforeach
                     </tbody>
