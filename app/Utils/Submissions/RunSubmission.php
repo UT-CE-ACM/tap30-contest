@@ -26,7 +26,7 @@ class RunSubmission
     public static function finalScore(User $team, Round $round){
 
         $result = 0.0;
-        $runs = $team->submits>last()->runs()->whereRoundId($round->id);
+        $runs = $team->submits->last()->runs()->whereRoundId($round->id)->get();
         foreach($runs as $run){
             $result += $run->RMSE;
         }
