@@ -7,6 +7,7 @@ use App\Models\Run;
 use App\Models\User;
 use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
+use File;
 
 /**
  * Created by PhpStorm.
@@ -48,30 +49,39 @@ class RunSubmission
         $language = $submit->language;
         $problem = $submit->problem;
 
-        $time_limit = 10; // seconds
+        $time_limit = 5; // seconds
         $memory_limit = 50*1024; // kb
-        $slug = "tap30-problem";
+        $slug = "tap30-problem-".$team->username;
 
         // create unique directory in /tmp
-        /*
         $process = new Process("mktemp -d");
         $process->run();
         if (!$process->isSuccessful()){
             return;
         }
-        $tmpDirectory = $process->getOutput();
-        */
+        $tmpDirectory = trim($process->getOutput());
+
 
         $context = [
+            'tmp_directory' => $tmpDirectory,
             'directory' => $attachment->getWholePath(),
             'problem_slug' => $slug,
             'file_extension' => $language->file_extension,
             'memory_limit' => $problem->memory_limit,
         ];
 
+        // Write the code to a file.
+        $address = $context['directory'] . '/' . $attachment->real_name;
+        $destination = RunSubmission::contextify('{{ tmp_directory }}/{{ problem_slug }}.{{ file_extension }}', $context);
+        $process = new Process("cp ". $address . " " . $destination);
+        $process->run();
+        if (!$process->isSuccessful()){
+            return;
+        }
+
         // Compile the code (if we need to).
         if ($language->compile_command) {
-            $process = new Process(RunSubmission::contextify('mbox -n -i -r {{ directory }} -C {{ directory }} -- ' . $language->compile_command, $context));
+            $process = new Process(RunSubmission::contextify('mbox -n -i -r {{ tmp_directory }} -C {{ tmp_directory }} -- ' . $language->compile_command, $context));
             $process->run();
             if (!$process->isSuccessful()) {
                 abort(500, $process->getErrorOutput());
@@ -83,6 +93,7 @@ class RunSubmission
         // Run the compiled executable for each test case.
         $execute_command = RunSubmission::contextify('(ulimit -v ' . $memory_limit . '; mbox -n -i -r {{ tmp_directory }} -C {{ tmp_directory }} -- ' . $language->execute_command . ')', $context);
 
+        // giving inputs to the executable file and getting outputs
         foreach ($round->test_cases as $test_case) {
             $test_case->load('attachments');
             $tcInput = File::get($test_case->attachments->first()->getRelativePath());

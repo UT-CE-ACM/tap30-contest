@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Timer;
 use Illuminate\Http\Request;
 use App\Models\Language;
 
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('landing');
     }
 
     /**
@@ -26,5 +27,21 @@ class HomeController extends Controller
     {
         $languages = Language::listLanguages();
         return view('home', compact('languages'));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function leaderBoard()
+    {
+        return view('public.leaderboard');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function landing()
+    {
+        return view('public.landing');
     }
 }

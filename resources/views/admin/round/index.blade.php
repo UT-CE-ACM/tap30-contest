@@ -28,6 +28,9 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                         {{Form::close()}}
+                        <a href="/admin/record?round_id={{$round->id}}" class="btn btn-primary" title="مشاهده مسابقات">
+                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                        </a>
                         @if(!$round->is_finished)
                             {{Form::open(array('url' => '/admin/round/'. \App\Models\Round::all()->last()->id, 'method' => 'put', 'class' => 'horizontal'))}}
                             <button type="submit" class="btn btn-success" title="انجام مرحله">

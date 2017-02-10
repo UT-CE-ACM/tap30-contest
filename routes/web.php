@@ -10,6 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use App\Models\Timer;
 use Illuminate\Support\Facades\Route;
 
 /*Route::get('/create-test-users', function (){
@@ -27,12 +28,15 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->middleware('timer');
+Route::get('/leader-board', 'HomeController@leaderBoard')->middleware('timerChange');
+Route::get('/landing', 'HomeController@landing')->middleware('timerChange');
+
 Route::post('/problem/{id}/submit', 'SubmitController@store');
 Route::delete('/submit/{id}/remove', 'SubmitController@destroy');
 

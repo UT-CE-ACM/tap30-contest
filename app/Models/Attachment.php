@@ -53,6 +53,6 @@ class Attachment extends Model
      * @return string
      */
     public function getWholePath(){
-        return storage_path('app/public') . '/' . $this->path;
+        return public_path() . '/' . $this->path;
     }
 }
