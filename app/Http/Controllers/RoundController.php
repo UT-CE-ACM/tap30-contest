@@ -109,6 +109,9 @@ class RoundController extends Controller
         if ($round->test_cases()->count() == 0){
             die("There is no test case to run the round!!");
         }
+        if (!$round->attachment){
+            die("There is no data file to run the round!!");
+        }
         // return $round;
         // running the rounds
         foreach ($round->records as $record){

@@ -81,7 +81,9 @@ class RecordController extends Controller
      */
     public function update(Request $request, Record $record)
     {
-        //
+        /*foreach ($record->teams as $team){
+            RunSubmission::handle($team, $round);
+        }*/
     }
 
     /**
