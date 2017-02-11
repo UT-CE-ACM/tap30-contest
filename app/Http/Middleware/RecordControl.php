@@ -16,12 +16,9 @@ class RecordControl
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->is_admin)
-            return $next($request);
         $record = $request->route('record');
-        foreach ($record->teams as $team)
-            if ($team->id == Auth::user()->id)
-                return $next($request);
+        if ($record->canUserSeeResult())
+            return $next($request);
         return abort(403);
     }
 }
