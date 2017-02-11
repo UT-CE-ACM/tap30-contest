@@ -123,6 +123,18 @@ class UserController extends Controller
             $member->save();
             $counter += 1;
         }
+        if ($user->members->isEmpty()){
+            Member::create([
+                "name" => $request->get('m1_name'),
+                "email" => $request->get('m1_email'),
+                "user_id" => $user->id
+            ]);
+            Member::create([
+                "name" => $request->get('m2_name'),
+                "email" => $request->get('m2_email'),
+                "user_id" => $user->id
+            ]);
+        }
 
 
         return redirect('/admin/user');

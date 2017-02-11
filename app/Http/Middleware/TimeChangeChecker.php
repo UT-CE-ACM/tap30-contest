@@ -18,6 +18,9 @@ class TimeChangeChecker
     {
         if (Timer::hasActiveContest())
             return redirect('home');
+        if ($request->path() != 'landing')
+            if (!Timer::isItAfterContest())
+                return redirect('landing');
         return $next($request);
     }
 }

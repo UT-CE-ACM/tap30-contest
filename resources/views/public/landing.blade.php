@@ -76,12 +76,13 @@
 	<script>
 		$(document).ready(function() {
 	        $('.countdown').final_countdown({
-	                'start': 0,
-	                'end': {{$d->getTimestamp()}},
-	                'now': {{$today->getTimestamp()}}
+                'start': 0,
+                'end': {{$d->getTimestamp()}},
+                'now': {{$today->getTimestamp()}}
 	        }, function() {
-	                // Finish Callback
-	        });
+                // Finish Callback
+                window.location = "/home";
+            });
 		});
 	</script>
 @endsection

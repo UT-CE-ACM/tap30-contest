@@ -23,7 +23,8 @@ class Admin
                 return redirect()->guest('login');
             }
         } else if (!Auth::guard($guard)->user()->is_admin){
-            return redirect()->to('/')->withErrors('Permission Denied');
+            return abort(403, 'Permission Denied');
+//            return redirect()->to('/')->withErrors('Permission Denied');
         }
 
         return $next($request);

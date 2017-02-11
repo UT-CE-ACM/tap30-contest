@@ -29,9 +29,9 @@ class LoginController extends Controller
     public function redirectPath()
     {
         if (Auth::user()->is_admin)
-            return "admin";
+            return "/admin";
         else
-            return "home";
+            return "/home";
     }
 
     /**
