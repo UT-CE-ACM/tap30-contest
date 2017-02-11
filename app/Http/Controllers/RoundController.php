@@ -40,7 +40,7 @@ class RoundController extends Controller
             if($user1->records->count() == 0){
                 $first_user_record = null;
             } else{
-                $first_user_record = $user2->records->max('id');
+                $first_user_record = $user1->records->max('id');
             }
             if($user2->records->count() == 0){
                 $second_user_record = null;
@@ -137,6 +137,12 @@ class RoundController extends Controller
         $round->delete();
         return back();
     }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function saveDataFile(Request $request, $id){
         $rules = [
             "attachment" => 'file | required',

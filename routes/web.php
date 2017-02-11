@@ -36,6 +36,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->middleware('timer');
 Route::get('/leader-board', 'HomeController@leaderBoard')->middleware('timerChange');
 Route::get('/landing', 'HomeController@landing')->middleware('timerChange');
+Route::get('/table', 'HomeController@table')->middleware('timerChange');
 Route::get('/record/{record}', 'HomeController@recordDetail')->middleware(['timerChange', 'recordControl']);
 
 Route::post('/problem/{id}/submit', 'SubmitController@store');

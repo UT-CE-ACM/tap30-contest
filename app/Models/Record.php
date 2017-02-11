@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property integer id
@@ -65,5 +66,18 @@ class Record extends BaseModel
      */
     public function round(){
         return $this->belongsTo('\\App\\Models\\Round', 'round_id');
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function canUserSeeResult(){
+        if (Auth::user()->is_admin)
+            return true;
+        foreach ($this->teams as $team)
+            if ($team->id == Auth::user()->id)
+                return true;
+        return false;
     }
 }

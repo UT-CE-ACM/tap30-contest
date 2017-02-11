@@ -70,6 +70,11 @@
                                         </li>
                                     @endif
                                     <li>
+                                        <a href="/table">
+                                            Contest Table
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

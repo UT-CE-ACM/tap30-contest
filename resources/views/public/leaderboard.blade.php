@@ -48,7 +48,7 @@
                             <section id="knockout-table" class="clearfix">
                                 <div class="column">
                                     <p>مرحله شماره {{ $record->round->number }}</p>
-                                    <p class="game comp-done" id="s01">
+                                    <p class="game @if($record->round->is_finished) comp-done @endif" id="s01">
                                         @foreach($record->teams as $team)
                                             <span class="team-name team-{{ $loop->iteration }}
                                                 @if($record->winner_id == $team->id) winner
