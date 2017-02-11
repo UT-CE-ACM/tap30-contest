@@ -63,5 +63,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'timer' => \App\Http\Middleware\TimeChecker::class,
         'timerChange' => \App\Http\Middleware\TimeChangeChecker::class,
+        'recordControl' => \App\Http\Middleware\RecordControl::class,
     ];
 }

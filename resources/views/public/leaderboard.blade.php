@@ -42,7 +42,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">مسابقات</div>
                 <div class="panel-body">
+                    <?php $hasRecords = false; ?>
                     @foreach(Auth::user()->records()->with(['teams','round'])->get() as $record)
+                            <?php $hasRecords = true; ?>
                             <section id="knockout-table" class="clearfix">
                                 <div class="column">
                                     <p>مرحله شماره {{ $record->round->number }}</p>
@@ -54,11 +56,14 @@
                                                 {{ $team->name }}
                                             </span>
                                         @endforeach
-                                        <a href="/record/{{$record->id}}/show-detail" class="show-result">result</a>
+                                        <a href="/record/{{$record->id}}" class="show-result">result</a>
                                     </p>
                                 </div>
                             </section>
                     @endforeach
+                    @if(!$hasRecords)
+                        <h4 class="text-center">در حال حاضر رکوردی موجود نیست!</h4>
+                    @endif
                 </div>
             </div>
         </div>
