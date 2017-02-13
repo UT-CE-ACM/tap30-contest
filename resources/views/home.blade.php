@@ -18,7 +18,7 @@
                 <div class="panel-heading">{{ $problem->title }}</div>
 
                 <div class="panel-body">
-                    <p>{{ $problem->description }}</p>
+                    <p style="word-wrap: break-word;">{{ $problem->description }}</p>
                     @foreach($problem->samples as $sample)
                         <hr>
 نمونه ی ورودی {{ $loop->iteration }}
