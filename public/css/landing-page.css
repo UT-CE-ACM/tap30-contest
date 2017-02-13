@@ -64,6 +64,52 @@ body {
 .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-text:hover {
 	color: #fff;
 }
+#credits {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	text-align: center;
+}
+#credits ul li {
+	display: inline-block;
+	list-style: none;
+	margin: 0 10px
+}
+#credits ul li:hover {
+	color: #ddd;
+}
+#credits ul {
+	padding: 10px 20px;
+	margin: 0 auto;
+	display: inline-block;
+	background: rgba(64, 64, 64, 0.4);
+	font-weight: bold;
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+	color: #aaa;
+	position: relative;
+	border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+#credits ul:before, #credits ul:after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	width: 0;
+	height: 0;
+}
+#credits ul:before {
+	left: -45px;
+	border-right: 45px solid rgba(64, 64, 64, 0.4);
+	border-top: 45px solid transparent;
+}
+#credits ul:after {
+	right: -45px;
+	border-left: 45px solid rgba(64, 64, 64, 0.4);
+	border-top: 45px solid transparent;
+}
+
+/* end vahid */
+
 @media (min-width: 768px) and (max-width: 991px) {
 	.clock-item {
 		margin-bottom: 30px;

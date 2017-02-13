@@ -100,5 +100,16 @@
     <script src="/js/app.js"></script>
     <script src="/js/jquery.js"></script>
     @yield('js')
+
+<footer>
+    <div id="credits">
+        <ul>
+        <li>توسط:‌ </li>
+        <li>محمدرضا کیانی فر</li>
+        <li>شهریار سلطان پور</li>
+        <li>وحید محمدی</li>
+    </ul>
+    </div>
+</footer>
 </body>
 </html>

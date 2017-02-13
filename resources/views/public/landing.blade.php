@@ -64,6 +64,14 @@
         </div><!-- /.clock-item -->
     </div><!-- /.clock -->
 </div><!-- /.countdown-wrapper -->
+<div id="credits">
+    <ul>
+        <li>توسط:‌ </li>
+        <li>محمدرضا کیانی فر</li>
+        <li>شهریار سلطان پور</li>
+        <li>وحید محمدی</li>
+    </ul>
+</div>
 @endsection
 
 @section('js')
