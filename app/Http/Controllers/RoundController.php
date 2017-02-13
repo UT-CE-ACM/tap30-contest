@@ -59,9 +59,8 @@ class RoundController extends Controller
             echo $user1->name . '  -  ' . $user2->name;
             echo "<br><br>";
 
-            return back();
         }
-
+        return back();
     }
 
     /**
