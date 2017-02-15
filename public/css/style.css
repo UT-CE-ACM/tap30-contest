@@ -201,7 +201,10 @@ footer {
 	opacity: 0;
 	transition: all .3s;
 	font-size: 80%;
+	transform: scale(0);
+	transform-origin: bottom;
 }
 [data-title]:hover:before {
 	opacity: 1;
+	transform: scale(1);
 }
