@@ -2,6 +2,7 @@
 
 namespace App\Utils\Submissions;
 
+use App\Models\Record;
 use App\Models\Round;
 use App\Models\Run;
 use App\Models\User;
@@ -17,7 +18,6 @@ use File;
  */
 class RunSubmission
 {
-
     /**
      * @param User $team
      * @param Round $round
@@ -26,11 +26,34 @@ class RunSubmission
     public static function finalScore(User $team, Round $round){
 
         $result = 0.0;
-        $runs = $team->submits->last()->runs()->whereRoundId($round->id);
+        $runs = $team->submits->last()->runs()->whereRoundId($round->id)->get();
         foreach($runs as $run){
             $result += $run->RMSE;
         }
         return $result;
+    }
+
+    /**
+     * @param Record $record
+     * @param Round $round
+     */
+    public static function determineWinner(Record $record, Round $round){
+        $firstTeamScore = RunSubmission::finalScore($record->teams[0], $round);
+        $secondTeamScore = RunSubmission::finalScore($record->teams[1], $round);
+        if ($secondTeamScore < $firstTeamScore){
+            $record->winner_id = $record->teams[1]->id;
+            $record->teams[0]->has_lost = true;
+            $record->teams[0]->save();
+        }
+        else{
+            $record->winner_id = $record->teams[0]->id;
+            $record->teams[1]->has_lost = true;
+            $record->teams[1]->save();
+        }
+        $record->save();
+        echo "********************<br>";
+        echo "Winner: " . $record->winner->name . "<br>";
+        echo "********************<br>";
     }
 
     /**
@@ -62,6 +85,7 @@ class RunSubmission
         echo "=======================================================<br>";
         $submit = $team->submits->last();
         $submit->load(['problem', 'attachment']);
+        $submit->runs()->whereRoundId($round->id)->delete();
         echo $team->name . ":<br>";
 
         $attachment = $submit->attachment;
