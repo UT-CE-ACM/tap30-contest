@@ -175,7 +175,7 @@ footer {
 }
 [data-title]:before {
 	position: absolute;
-	content: attr("data-title");
+	content: attr(data-title);
 	bottom: 100%;
 	right: -30px;
 	left: -30px;
