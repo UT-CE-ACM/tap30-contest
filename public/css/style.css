@@ -168,3 +168,15 @@ footer {
 #leaderboard-table tr td:nth-child(odd) {
 	background: #f9f9f9;
 }
+
+/* popup title data-title */
+[data-title] {
+	position: relative;
+}
+[data-title]:before {
+	position: absolute;
+	content: attr("data-title");
+	bottom: 100%;
+	right: -30px;
+	left: -30px;
+}

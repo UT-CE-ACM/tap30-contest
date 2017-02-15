@@ -60,7 +60,7 @@
                                         @foreach($usersRun as $userRun)
                                             <td>
                                 <span style="color: {{ $userRun->status == 'AC' ? 'green' : 'red'}}"
-                                      title="{{ $userRun->message }}">
+                                      data-title="{{ $userRun->message }}">
                                     {{ trans('general.'.$userRun->status, [], null, 'en') }}
                                 </span>
                                             </td>
