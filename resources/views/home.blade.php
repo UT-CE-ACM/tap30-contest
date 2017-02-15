@@ -19,6 +19,11 @@
 
                 <div class="panel-body">
                     <p style="word-wrap: break-word;">{{ $problem->description }}</p>
+                    @if($problem->attachment)
+                        <p>متن سوال :
+                            <a href="{{ $problem->attachment->getPath() }}">{{ $problem->attachment->real_name }}</a>
+                        </p>
+                    @endif
                     @foreach($problem->samples as $sample)
                         <hr>
 نمونه ی ورودی {{ $loop->iteration }}
@@ -30,7 +35,7 @@
                                 <a href="{{ $sample->attachment->getPath() }}">{{ $sample->attachment->real_name }}</a>
                             </p>
                         @endif
-                    @endforeach
+                        @endforeach
                     <?php $submit = Auth::user()->submits()->with(['attachment', 'language'])->whereProblemId($problem->id)->first() ?>
                     @if($submit)
                         <div class="user-uploaded-file">

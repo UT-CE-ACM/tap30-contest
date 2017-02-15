@@ -36,6 +36,23 @@
                     {{ Form::textarea('description', old('description'), ['placeholder' => 'توضیحات سوال', "class" => 'form-control', "rows" => 5]) }}
                 </div>
             </div>
+            <div class="row padding">
+                <label class="col-md-2 control-label">فایل پیوست</label>
+                <div class="col-md-10 attachment-container">
+                    @if($problem->attachment)
+                        <div class="inner-attachment-container">
+                            <a href="/admin/attachment/remove/{{ $problem->attachment->id }}" class="remove-link" title="حذف">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </a>
+                            <a href="{{ $problem->attachment->getPath() }}">
+                                <span>{{ $problem->attachment->real_name }}</span>
+                            </a>
+                        </div>
+                    @else
+                        {{ Form::file('attachment', ['placeholder' => 'خروجی', "class" => 'form-control']) }}
+                    @endif
+                </div>
+            </div>
 
             {{--<div class="padding" id="testcase-container"></div>
 

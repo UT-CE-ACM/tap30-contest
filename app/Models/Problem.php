@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer id
  * @property string title
  * @property string description
+ * @property Attachment attachment
  * @property Submit[] submits
  * @property Sample[] samples
  * @property DateTime created_at
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Problem
  * @package App\Models
  */
-class Problem extends Model
+class Problem extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
@@ -40,5 +41,11 @@ class Problem extends Model
      */
     public function submits(){
         return $this->hasMany("\\App\\Models\\Submit", "problem_id");
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function attachment(){
+        return $this->morphOne("\\App\\Models\\Attachment", 'attachable');
     }
 }

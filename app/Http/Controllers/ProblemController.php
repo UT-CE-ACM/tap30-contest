@@ -38,14 +38,19 @@ class ProblemController extends Controller
     {
         $rules = [
             "title" => "required",
-            "description" => "required"
+            "description" => "required",
+            "attachment" => "file"
         ];
         $this->validate($request, $rules);
 
-        Problem::create([
+        $problem = Problem::create([
             'title' => $request->get('title'),
             'description' => $request->get('description'),
         ]);
+        if ($request->hasFile('attachment')){
+//            echo 'HAssss attachment ';
+            $problem->saveFile('attachment');
+        }
         return redirect('/admin/problem');
     }
 
@@ -82,7 +87,8 @@ class ProblemController extends Controller
     {
         $rules = [
             "title" => "required",
-            "description" => "required"
+            "description" => "required",
+            "attachment" => "file"
         ];
         $this->validate($request, $rules);
 
@@ -90,6 +96,9 @@ class ProblemController extends Controller
         $problem->title = $request->get('title');
         $problem->description = $request->get('description');
         $problem->save();
+        if ($request->hasFile('attachment')) {
+            $problem->saveFile('attachment');
+        }
 
         return redirect('/admin/problem');
     }
