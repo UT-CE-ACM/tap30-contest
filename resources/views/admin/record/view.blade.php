@@ -63,7 +63,7 @@
                             <?php $usersRun = [$runs[0][$loop->index], $runs[1][$loop->index]]; ?>
                             @foreach($usersRun as $userRun)
                             <td>
-                                <span style="color: {{ $userRun->status == 'AC' ? 'green' : 'red'}}" title="{{ $userRun->message }}">
+                                <span style="color: {{ $userRun->status == 'AC' ? 'green' : 'red'}}" data-title="{{ $userRun->message }}">
                                     {{ trans('general.'.$userRun->status, [], null, 'en') }}
                                 </span>
                             </td>
