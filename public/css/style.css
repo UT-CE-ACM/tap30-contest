@@ -189,11 +189,12 @@ footer {
 	position: relative;
 }
 [data-title]:before {
+	direction: ltr;
 	position: absolute;
 	content: attr(data-title);
 	bottom: 110%;
-	right: -30px;
-	left: -30px;
+	right: -85px;
+	left: -85px;
 	background: #fff;
 	padding: 10px;
 	border-radius: 4px;

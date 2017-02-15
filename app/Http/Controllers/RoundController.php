@@ -113,8 +113,8 @@ class RoundController extends Controller
         if (!$round->attachment){
             die("There is no data file to run the round!!");
         }
-        // return $round;
         // running the rounds
+        echo view('layouts.log');
         foreach ($round->records as $record){
             foreach ($record->teams as $team){
                 RunSubmission::handle($team, $round);

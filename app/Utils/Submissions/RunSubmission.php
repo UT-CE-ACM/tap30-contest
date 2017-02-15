@@ -51,9 +51,10 @@ class RunSubmission
             $record->teams[1]->save();
         }
         $record->save();
-        echo "********************<br>";
-        echo "Winner: " . $record->winner->name . "<br>";
-        echo "********************<br>";
+        echo '<div class="clearfix"></div>';
+        echo '<p class="text-center result">';
+        echo '<b>Winner: </b><button type="button" class="btn btn-success">' . $record->winner->name . '</button>';
+        echo '</p>';
     }
 
     /**
@@ -82,11 +83,14 @@ class RunSubmission
     }
 
     public static function handle(User $team, Round $round){
-        echo "=======================================================<br>";
+        echo '<div class="clearfix"></div>';
+        echo '<div class="row content">
+                <div class="col-md-2 sidenav"></div>
+                    <div class="col-md-8 text-left"> 
+                        <button type="button" class="btn btn-info">'. $team->name .'</button>';
         $submit = $team->submits->last();
         $submit->load(['problem', 'attachment']);
         $submit->runs()->whereRoundId($round->id)->delete();
-        echo $team->name . ":<br>";
 
         $attachment = $submit->attachment;
         $language = $submit->language;
@@ -103,7 +107,7 @@ class RunSubmission
             return;
         }
         $tmpDirectory = trim($process->getOutput());
-        echo "Temp directory " . $tmpDirectory . "has been created!<br>";
+        echo "<p>Temp directory " . $tmpDirectory . "has been created!</p>";
 
         $context = [
             'tmp_directory' => $tmpDirectory,
@@ -121,7 +125,7 @@ class RunSubmission
         if (!$process->isSuccessful()){
             return;
         }
-        echo "Submit file " . $source . " has been copied to tmp directory!<br>";
+        echo "<p>Submit file " . $source . " has been copied to tmp directory!</p>";
 
         // Copy Round Attachment to tmp directory
         $source = $round->attachment->getWholePath() . '/' . $round->attachment->real_name;
@@ -130,7 +134,7 @@ class RunSubmission
         if (!$process->isSuccessful()){
             return;
         }
-        echo "Data file " . $source . " has been copied to tmp directory!<br>";
+        echo "<p>Data file " . $source . " has been copied to tmp directory!</p>";
 
         $status = '';
         // Compile the code (if we need to)
@@ -146,17 +150,18 @@ class RunSubmission
         // Run the compiled executable for each test case.
         $execute_command = RunSubmission::contextify('(ulimit -v ' . $memory_limit . '; mbox -n -i -r {{ tmp_directory }} -C {{ tmp_directory }} -- ' . $language->execute_command . ')', $context);
 
+        echo '<hr>';
         $counter = 1;
-        echo "<pre>";
         // giving inputs to the executable file and getting outputs
         foreach ($round->test_cases as $test_case) {
-            echo "Test Case " . $counter++ . ":<br>";
+            echo "<h4>Test Case " . $counter++ . ":</h4>";
             $test_case->load('attachments');
             $tcInput = File::get($test_case->attachments->first()->getRelativePath());
             $tcOutput = File::get($test_case->attachments->last()->getRelativePath());
 
-            echo "\tRun input: ". $tcInput . "<br>";
-            echo "\tRun output: ". $tcOutput . "<br>";
+            echo '<div class="row">';
+            echo '<textarea class="col-md-4" style ="max-height:400px;min-height: 250px;">Run input: '. $tcInput . '</textarea>';
+            echo '<textarea class="col-md-4" style ="max-height:400px;min-height: 250px;">Run output: '. $tcOutput . '</textarea>';
 
             $run = new Run;
             $run->round_id = $round->id;
@@ -169,8 +174,8 @@ class RunSubmission
                 $run->message = $compileErrorMessage;
                 $run->RMSE = 1000;
                 $run->save();
-                echo "\t<span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
-                echo "\tMessage: " . $run->message . "<br>";
+                echo "</div><span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
+                echo "<p><b>Message</b>: " . $run->message . "</p>";
                 continue;
             }
 
@@ -186,8 +191,8 @@ class RunSubmission
                 $run->message = $e->getMessage();
                 $run->RMSE = 900;
                 $run->save();
-                echo "\t<span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
-                echo "\tMessage: " . $run->message . "<br>";
+                echo "</div><span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
+                echo "<p><b>Message</b>: " . $run->message . "</p>";
                 continue;
             }
             if (!$process->isSuccessful()) {
@@ -196,21 +201,22 @@ class RunSubmission
                 $run->message = $process->getErrorOutput();;
                 $run->RMSE = 1000;
                 $run->save();
-                echo "\t<span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
-                echo "\tMessage: " . $run->message . "<br>";
+                echo "</div><span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
+                echo "<p><b>Message</b>: " . $run->message . "</p>";
                 continue;
             }
             $output = $process->getOutput();
-            echo "\tUser output: " . trim($output) . "<br>";
+            echo '<textarea class="col-md-4" style="max-height:400px; min-height: 250px;">User output: '. trim($output) . '</textarea></div>';
 
             // evaluating result of test case
             $run->RMSE = RunSubmission::getRMSE($output, $tcOutput);
             $run->status = 'AC';
             $run->save();
 
-            echo "\t<span style='color: green'>Run has been done successfully!</span><br>";
+            echo "<span style='color: green'>Run has been done successfully!</span><br>";
         }
-        echo "</pre>";
-
+        echo '</div>
+            <div class="col-md-2 sidenav"></div>
+        </div>';
     }
 }
