@@ -42,24 +42,34 @@
             <div class="panel panel-default">
                 <div class="panel-heading">مسابقات</div>
                 <div class="panel-body">
+                <table id="leaderboard-table">
+                	<tr class="comp-done">
+                		<td>0</td>
+                		<td class="team-name winner">teamname</td>
+                		<td class="team-name loser">teamname2</td>
+                		<td><a href="#" class="show-result">result</a></td>
+                	</tr>
+                	<tr class="comp-done">
+                		<td>0</td>
+                		<td class="team-name winner">teamname</td>
+                		<td class="team-name loser">teamname2</td>
+                		<td><a href="#" class="show-result">result</a></td>
+                	</tr>
+                </table>
                     <?php $hasRecords = false; ?>
                     @foreach(Auth::user()->records()->with(['teams','round'])->get() as $record)
                             <?php $hasRecords = true; ?>
-                            <section id="knockout-table" class="clearfix">
-                                <div class="column">
-                                    <p>مرحله شماره {{ $record->round->number }}</p>
-                                    <p class="game @if($record->round->is_finished) comp-done @endif" id="s01">
-                                        @foreach($record->teams as $team)
-                                            <span class="team-name team-{{ $loop->iteration }}
-                                                @if($record->winner_id == $team->id) winner
-                                                    @elseif($team->has_lost) loser @endif">
-                                                {{ $team->name }}
-                                            </span>
-                                        @endforeach
-                                        <a href="/record/{{$record->id}}" class="show-result">result</a>
-                                    </p>
-                                </div>
-                            </section>
+                            <table id="leaderboard-table">
+                            	<tr @if($record->round->is_finished) class="comp-done" @endif>
+                            		<td>{{ $record->round->number }}</td>
+                            		@foreach($record->teams as $team)
+                            			<td class="team-name team-{{ $loop->iteration }}
+                                            @if($record->winner_id == $team->id) winner
+                                            @elseif($team->has_lost) loser @endif">{{ $team->name }}</td>
+                            		@endforeach
+                            		<td><a href="/record/{{$record->id}}" class="show-result">result</a></td>
+                            	</tr>
+                            </table>
                     @endforeach
                     @if(!$hasRecords)
                         <h4 class="text-center">در حال حاضر رکوردی موجود نیست!</h4>

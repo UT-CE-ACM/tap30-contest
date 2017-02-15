@@ -142,3 +142,29 @@ footer {
 	bottom: 0;
 	z-index: -1;
 }
+
+/* leader board table */
+
+#leaderboard-table, #leaderboard-table tbody, #leaderboard-table tr {
+	width: 100%;
+}
+#leaderboard-table tr {
+	background: #fff;
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+#leaderboard-table tr td {
+	border-left: 1px solid #ddd;
+	padding: 10px 13px;
+	text-align: center;
+	font-size: 17px;
+}
+#leaderboard-table tr td:first-child {
+	width: 40px;
+}
+#leaderboard-table {
+	border: 4px solid #e5e5e5;
+}
+#leaderboard-table tr td:nth-child(odd) {
+	background: #f9f9f9;
+}
