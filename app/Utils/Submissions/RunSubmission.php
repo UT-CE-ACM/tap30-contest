@@ -303,6 +303,7 @@ class RunSubmission
 
         $log = new Log;
         $log->submit_id = $submit->id;
+        $log->message = '';
         if ($status == 'CE'){
             // Compile Error Exception
             $log->status = $status;
@@ -314,7 +315,8 @@ class RunSubmission
         }
 
         echo '<hr>';
-        $counter = 1;
+        $counter = 0;
+        $sum = 0;
         // giving inputs to the executable file and getting outputs
         foreach (Sample::with('attachments')->get() as $sample) {
             echo "<h4>Test Case " . $counter++ . ":</h4>";
@@ -364,7 +366,8 @@ class RunSubmission
 
             // evaluating result of test case
             try {
-                RunSubmission::getRMSE($output, $tcOutput);
+                $score = RunSubmission::getRMSE($output, $tcOutput);
+                $sum += $score;
             }
             catch(\Exception $e){
                 $log->status = 'WR';
@@ -375,11 +378,14 @@ class RunSubmission
                 continue;
             }
             $log->status = 'AC';
-            $log->message = 'Your code was accepted!';
+            $log->message .= 'sample '. $counter. ' RMSE = ' . $score . ' and Sum of RMSE = ' . $sum. '<br>';
             $log->save();
 
+
             echo "<span style='color: green'>Run has been done successfully!</span><br>";
+            echo "<span style='color: green'>RMSE: " . $score . "</span><br>";
         }
+        echo "<span style='color: green'>Sum of RMSE: " . $sum . "</span><br>";
         echo '</div>
             <div class="col-md-2 sidenav"></div>
         </div>';
