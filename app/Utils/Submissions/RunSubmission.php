@@ -386,6 +386,12 @@ class RunSubmission
             echo "<span style='color: green'>Run has been done successfully!</span><br>";
             echo "<span style='color: green'>RMSE: " . $score . " and Sum of RMSE = " . $sum. "</span><br>";
         }
+        if ($log->status == 'AC') {
+            $log->message .= '<p>Sum of RMSE = ' . $sum . '</p>';
+            $log->save();
+        }
+
+
         echo "<span style='color: green'>Sum of RMSE: " . $sum . "</span><br>";
         echo '</div>
             <div class="col-md-2 sidenav"></div>
