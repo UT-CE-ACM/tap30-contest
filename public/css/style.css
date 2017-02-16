@@ -15,14 +15,16 @@ html {
 	background-attachment: fixed;
 }
 body {
-	background-color: rgba(18, 25, 32, 0.6);
-	background-position: center;
-	background-repeat: repeat;
+	background: transparent;
 	min-height: 100vh;
 }
 body {
 	font-family: IRANsans, tahoma, sans-serif;
 	font-size: 16px;
+}
+#app {
+	background-color: rgba(18, 25, 32, 0.6);
+	min-height: 100vh;
 }
 .navbar-default {
 	background: rgba(44, 62, 80, 0.6);
