@@ -45,20 +45,54 @@
             </div>
 
             <div class="row padding">
-                <label class="col-md-2 control-label">فایل پیوست</label>
+                <label class="col-md-2 control-label">فایل ورودی</label>
                 <div class="col-md-10 attachment-container">
-                @if($sample->attachment)
+                @if($sample->attachments->first())
                     <div class="inner-attachment-container">
-                        <a href="/admin/attachment/remove/{{ $sample->attachment->id }}" class="remove-link" title="حذف">
+                        <a href="/admin/attachment/remove/{{ $sample->attachments->first()->id }}" class="remove-link" title="حذف">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>
-                        <a href="{{ $sample->attachment->getPath() }}">
-                            <span>{{ $sample->attachment->real_name }}</span>
+                        <a href="{{ $sample->attachments->first()->getPath() }}">
+                            <span>{{ $sample->attachments->first()->real_name }}</span>
                         </a>
                     </div>
                 @else
-                    {{ Form::file('attachment', ['placeholder' => 'خروجی', "class" => 'form-control']) }}
+                    {{ Form::file('input_file', ['placeholder' => 'خروجی', "class" => 'form-control']) }}
                 @endif
+                </div>
+            </div>
+            <div class="row padding">
+                <label class="col-md-2 control-label">فایل خروجی</label>
+                <div class="col-md-10 attachment-container">
+                    @if($sample->attachments->get(1))
+                        <div class="inner-attachment-container">
+                            <a href="/admin/attachment/remove/{{ $sample->attachments->get(1)->id }}" class="remove-link" title="حذف">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </a>
+                            <a href="{{ $sample->attachments->get(1)->getPath() }}">
+                                <span>{{ $sample->attachments->get(1)->real_name }}</span>
+                            </a>
+                        </div>
+                    @else
+                        {{ Form::file('output_file', ['placeholder' => 'خروجی', "class" => 'form-control']) }}
+                    @endif
+                </div>
+            </div>
+            <div class="row padding">
+                <label class="col-md-2 control-label">فایل داده</label>
+                <div class="col-md-10 attachment-container">
+                    @if($sample->attachments->last())
+                        <div class="inner-attachment-container">
+                            <a href="/admin/attachment/remove/{{ $sample->attachments->last()->id }}" class="remove-link" title="حذف">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </a>
+                            <a href="{{ $sample->attachments->last()->getPath() }}">
+                                <span>{{ $sample->attachments->last()->real_name }}</span>
+                            </a>
+                        </div>
+                    @else
+                        {{ Form::file('data_file', ['placeholder' => 'خروجی', "class" => 'form-control']) }}
+                    @endif
                 </div>
             </div>
 

@@ -107,9 +107,19 @@
                         <pre>{{ $sample->input }}</pre>
 نمونه خروجی {{ $loop->iteration }}
                         <pre>{{ $sample->output }}</pre>
-                        @if($sample->attachment)
-                            <p>فایل پیوست :
-                                <a href="{{ $sample->attachment->getPath() }}">{{ $sample->attachment->real_name }}</a>
+                        @if($sample->attachments->first())
+                            <p>فایل ورودی :
+                                <a href="{{ $sample->attachments->first()->getPath() }}">{{ $sample->attachments->first()->real_name }}</a>
+                            </p>
+                        @endif
+                        @if($sample->attachments->get(1))
+                            <p>فایل خروجی :
+                                <a href="{{ $sample->attachments->get(1)->getPath() }}">{{ $sample->attachments->get(1)->real_name }}</a>
+                            </p>
+                        @endif
+                        @if($sample->attachments->last())
+                            <p>فایل داده :
+                                <a href="{{ $sample->attachments->last()->getPath() }}">{{ $sample->attachments->last()->real_name }}</a>
                             </p>
                         @endif
                         @endforeach
