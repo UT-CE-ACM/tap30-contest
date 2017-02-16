@@ -103,9 +103,9 @@
                     @endif
                     @foreach($problem->samples as $sample)
                         <hr>
-نمونه ی ورودی {{ $loop->iteration }}
+نمونه ی ورودی {{ $loop->index }}
                         <pre>{{ $sample->input }}</pre>
-نمونه خروجی {{ $loop->iteration }}
+نمونه خروجی {{ $loop->index }}
                         <pre>{{ $sample->output }}</pre>
                         @if($sample->attachments->first())
                             <p>فایل ورودی :
