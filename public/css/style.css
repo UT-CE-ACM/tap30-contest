@@ -6,6 +6,18 @@
 	font-family: 'IRANsans-b';
 	src: url(/fonts/IRANSans-B.woff) format('woff'), url(/fonts/IRANSans-B.ttf) format('truetype')
 }
+/*html {
+	background-image: url('../img/back.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 100vh;
+}
+body {
+	background-color: rgba(18, 25, 32, 0.6);
+	background-position: center;
+	background-repeat: repeat;
+}*/
 body {
 	font-family: IRANsans, tahoma, sans-serif;
 	font-size: 16px;

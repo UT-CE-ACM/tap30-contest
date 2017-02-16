@@ -1,18 +1,6 @@
 html, body {
 	height: 100%;
 }
-html {
-	background-image: url('../img/back.jpg');
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-body {
-	background-color: rgba(18, 25, 32, 0.6);
-	/* background-image: url('../img/pattern.png'); */
-	background-position: center;
-	background-repeat: repeat;
-}
 .countdown-container {
 	position: absolute;
 	top: 50%;

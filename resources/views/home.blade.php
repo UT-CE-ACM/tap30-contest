@@ -1,7 +1,84 @@
 @extends('layouts.app')
 
+@section('css')
+    <link rel="stylesheet" href="css/landing-page.css">
+    <style>
+        .countdown-container {
+    margin-top: 25px;
+    padding: 0;
+    right: 0;
+    left: 0;
+    width: 600px;
+    position: static;
+    top: initial;
+    transform: initial;
+}
+    </style>
+@endsection
+
 @section('content')
 <div class="container-fluid">
+    <div class="row">
+    <div class="countdown countdown-container container"
+         data-start="1"
+         data-end="2000"
+         data-now="4">
+        <div class="clock row">
+
+            <div class="clock-item clock-seconds countdown-time-value col-sm-4 col-md-4">
+                <div class="wrap">
+                    <div class="inner">
+                        <div id="canvas-seconds" class="clock-canvas"></div>
+
+                        <div class="text">
+                            <p class="val">0</p>
+                            <p class="type-seconds type-time">ثانیه</p>
+                        </div><!-- /.text -->
+                    </div><!-- /.inner -->
+                </div><!-- /.wrap -->
+            </div><!-- /.clock-item -->
+
+            <div class="clock-item clock-minutes countdown-time-value col-sm-4 col-md-4">
+                <div class="wrap">
+                    <div class="inner">
+                        <div id="canvas-minutes" class="clock-canvas"></div>
+
+                        <div class="text">
+                            <p class="val">0</p>
+                            <p class="type-minutes type-time">دقیقه</p>
+                        </div><!-- /.text -->
+                    </div><!-- /.inner -->
+                </div><!-- /.wrap -->
+            </div><!-- /.clock-item -->
+
+            <div class="clock-item clock-hours countdown-time-value col-sm-4 col-md-4">
+                <div class="wrap">
+                    <div class="inner">
+                        <div id="canvas-hours" class="clock-canvas"></div>
+
+                        <div class="text">
+                            <p class="val">0</p>
+                            <p class="type-hours type-time">ساعت</p>
+                        </div><!-- /.text -->
+                    </div><!-- /.inner -->
+                </div><!-- /.wrap -->
+            </div><!-- /.clock-item -->
+            <div class="clock-item clock-days countdown-time-value col-sm-6 col-md-3" style="opacity: 0; transform: scale(0); height: 0; visibility: hidden;">
+            <div class="wrap">
+                <div class="inner">
+                    <div id="canvas-days" class="clock-canvas"></div>
+
+                    <div class="text">
+                        <p class="val">0</p>
+                        <p class="type-days type-time">روز</p>
+                    </div><!-- /.text -->
+                </div><!-- /.inner -->
+            </div><!-- /.wrap -->
+        </div><!-- /.clock-item -->
+        </div><!-- /.clock -->
+    </div><!-- /.countdown-wrapper -->
+
+    </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             @if (count($errors) > 0)
@@ -79,4 +156,26 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script src="js/jquery.final-countdown.min.js"></script>
+    <script src="js/kinetic-v5.1.0.min.js"></script>
+    <?php
+    $start = new DateTime(\App\Models\Timer::all()->first()->starts_at);
+    $end = new DateTime(\App\Models\Timer::all()->first()->ends_at);
+    $today = new DateTime();
+    ?>
+    <script>
+        $(document).ready(function() {
+            $('.countdown').final_countdown({
+                'start': {{$start->getTimestamp()}},
+                'end': {{$end->getTimestamp()}},
+                'now': {{$today->getTimestamp()}}
+            }, function() {
+                // Finish Callback
+                window.location = "/home";
+            });
+        });
+    </script>
 @endsection
