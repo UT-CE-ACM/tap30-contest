@@ -232,6 +232,7 @@ class RunSubmission
             $run->save();
 
             echo "<span style='color: green'>Run has been done successfully!</span><br>";
+            echo "<span style='color: green'>RMSE: " . $run->RMSE . "</span><br>";
         }
         echo '</div>
             <div class="col-md-2 sidenav"></div>
@@ -378,12 +379,12 @@ class RunSubmission
                 continue;
             }
             $log->status = 'AC';
-            $log->message .= 'sample '. $counter. ' RMSE = ' . $score . ' and Sum of RMSE = ' . $sum. '<br>';
+            $log->message .= 'sample '. $counter. ' RMSE = ' . $score . '<br>';
             $log->save();
 
 
             echo "<span style='color: green'>Run has been done successfully!</span><br>";
-            echo "<span style='color: green'>RMSE: " . $score . "</span><br>";
+            echo "<span style='color: green'>RMSE: " . $score . " and Sum of RMSE = " . $sum. "</span><br>";
         }
         echo "<span style='color: green'>Sum of RMSE: " . $sum . "</span><br>";
         echo '</div>
