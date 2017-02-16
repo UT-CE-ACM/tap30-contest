@@ -316,7 +316,7 @@ class RunSubmission
         echo '<hr>';
         $counter = 1;
         // giving inputs to the executable file and getting outputs
-        foreach (Sample::with('attachments')->all() as $sample) {
+        foreach (Sample::with('attachments')->get() as $sample) {
             echo "<h4>Test Case " . $counter++ . ":</h4>";
 
             // Copy Round Attachment to tmp directory

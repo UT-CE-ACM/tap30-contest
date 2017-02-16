@@ -59,7 +59,7 @@ Route::group(
         Route::resource('test-case', 'TestCaseController');
         Route::resource('record', 'RecordController');
 
-        Route::post('submit/{id}/set-judge-request','SubmitController@setJudgeRequest');
+        Route::get('submit/{id}/run-judge-request','SubmitController@runJudgeRequest');
 
         // attachments management
         Route::any('attachment/remove/{id}', 'AttachmentController@remove');

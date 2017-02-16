@@ -155,11 +155,13 @@ class SubmitController extends Controller
      */
     public function runJudgeRequest($id)
     {
-        $submit = Submit::find($id);
         echo view('layouts.log');
-        $submit->has_request = false;
+        $submit = Submit::find($id);
+        $submit->judge_request = false;
         $submit->save();
 
-        RunSubmission::preJudge($submit);
+        $user = $submit->team;
+
+        RunSubmission::preJudge($user);
     }
 }

@@ -15,6 +15,8 @@ namespace App\Models;
  */
 class Log extends BaseModel
 {
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
