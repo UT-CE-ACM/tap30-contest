@@ -81,7 +81,7 @@ class RunSubmission
         foreach($output as $key => $value){
             $result += pow((double)$value - (double)$answer[$key],2);
         }
-        return sqrt($result);
+        return sqrt($result / count($output));
     }
 
     public static function handle(User $team, Round $round){
@@ -232,6 +232,7 @@ class RunSubmission
             $run->save();
 
             echo "<span style='color: green'>Run has been done successfully!</span><br>";
+            echo "<span style='color: green'>RMSE: " . $run->RMSE . "</span><br>";
         }
         echo '</div>
             <div class="col-md-2 sidenav"></div>
@@ -378,13 +379,19 @@ class RunSubmission
                 continue;
             }
             $log->status = 'AC';
-            $log->message .= 'sample '. $counter. ' RMSE = ' . $score . ' and Sum of RMSE = ' . $sum. '<br>';
+            $log->message .= 'sample '. $counter. ' RMSE = ' . $score . '</br>';
             $log->save();
 
 
             echo "<span style='color: green'>Run has been done successfully!</span><br>";
-            echo "<span style='color: green'>RMSE: " . $score . "</span><br>";
+            echo "<span style='color: green'>RMSE: " . $score . " and Sum of RMSE = " . $sum. "</span><br>";
         }
+        if ($log->status == 'AC') {
+            $log->message .= '<p>Sum of RMSE = ' . $sum . '</p>';
+            $log->save();
+        }
+
+
         echo "<span style='color: green'>Sum of RMSE: " . $sum . "</span><br>";
         echo '</div>
             <div class="col-md-2 sidenav"></div>

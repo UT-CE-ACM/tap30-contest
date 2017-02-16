@@ -26,8 +26,14 @@ class SubmitController extends Controller
      */
     public function index()
     {
+        if (request()->has('trashed'))
+            $submits = Submit::onlyTrashed()->with(['attachment', 'team' ,'problem'])->get();
+        else if(request()->has('judge_request'))
+            $submits = Submit::with(['attachment', 'team' ,'problem'])->whereJudgeRequest(true)->get();
+        else
+            $submits = Submit::with(['attachment', 'team' ,'problem'])->get();
         return view('admin.submit.index')
-            ->with('submits', Submit::withTrashed()->with('attachment')->with('team')->with('problem')->get());
+            ->with('submits', $submits);
     }
 
     /**
