@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="css/login-page.css">
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
