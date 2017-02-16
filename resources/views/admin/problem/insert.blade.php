@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="row padding">
-                <label class="col-md-2 control-label">فایل پیوست</label>
+                <label class="col-md-2 control-label">متن سوال</label>
                 <div class="col-md-10 attachment-container">
                     @if($problem->attachment)
                         <div class="inner-attachment-container">
