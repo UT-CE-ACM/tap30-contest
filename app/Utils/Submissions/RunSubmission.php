@@ -98,7 +98,7 @@ class RunSubmission
         $language = $submit->language;
         $problem = $submit->problem;
 
-        $time_limit = 120; // seconds
+        $time_limit = 55; // seconds
         $memory_limit = 200*1024; // kb
         $slug = explode(".", $attachment->real_name)[0];
 
@@ -252,7 +252,7 @@ class RunSubmission
         $language = $submit->language;
         $problem = $submit->problem;
 
-        $time_limit = 120; // seconds
+        $time_limit = 55; // seconds
         $memory_limit = 200*1024; // kb
         $slug = explode(".", $attachment->real_name)[0];
 
