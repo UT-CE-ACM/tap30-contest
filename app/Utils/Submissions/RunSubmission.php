@@ -98,8 +98,8 @@ class RunSubmission
         $language = $submit->language;
         $problem = $submit->problem;
 
-        $time_limit = 5; // seconds
-        $memory_limit = 50*1024; // kb
+        $time_limit = 120; // seconds
+        $memory_limit = 200*1024; // kb
         $slug = explode(".", $attachment->real_name)[0];
 
         // create unique directory in /tmp
@@ -251,8 +251,8 @@ class RunSubmission
         $language = $submit->language;
         $problem = $submit->problem;
 
-        $time_limit = 5; // seconds
-        $memory_limit = 50*1024; // kb
+        $time_limit = 120; // seconds
+        $memory_limit = 200*1024; // kb
         $slug = explode(".", $attachment->real_name)[0];
 
         // create unique directory in /tmp
