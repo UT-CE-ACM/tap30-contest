@@ -6,7 +6,7 @@
 	font-family: 'IRANsans-b';
 	src: url(/fonts/IRANSans-B.woff) format('woff'), url(/fonts/IRANSans-B.ttf) format('truetype')
 }
-/*html {
+html {
 	background-image: url('../img/back.jpg');
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -17,10 +17,18 @@ body {
 	background-color: rgba(18, 25, 32, 0.6);
 	background-position: center;
 	background-repeat: repeat;
-}*/
+	min-height: 100vh;
+}
 body {
 	font-family: IRANsans, tahoma, sans-serif;
 	font-size: 16px;
+}
+.navbar-default {
+	background: rgba(44, 62, 80, 0.6);
+	border-color: rgba(255, 255, 255, 0.4);
+}
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-text:hover {
+	color: #fff;
 }
 form .form-padding {
 	padding: 15px;
