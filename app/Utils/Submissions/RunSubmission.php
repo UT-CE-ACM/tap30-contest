@@ -81,7 +81,7 @@ class RunSubmission
         foreach($output as $key => $value){
             $result += pow((double)$value - (double)$answer[$key],2);
         }
-        return sqrt($result);
+        return sqrt($result / count($output));
     }
 
     public static function handle(User $team, Round $round){
