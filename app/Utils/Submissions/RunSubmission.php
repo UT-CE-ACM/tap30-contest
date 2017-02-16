@@ -379,7 +379,7 @@ class RunSubmission
                 continue;
             }
             $log->status = 'AC';
-            $log->message .= 'sample '. $counter. ' RMSE = ' . $score . '\n';
+            $log->message .= 'sample '. $counter. ' RMSE = ' . $score . '</br>';
             $log->save();
 
 
