@@ -31,7 +31,7 @@ class User extends Authenticatable
     /**
      * @var int
      */
-    public static $maxNumOfRequest = 5;
+    public static $maxNumOfRequest = 10;
 
     /**
      * The attributes that are mass assignable.
