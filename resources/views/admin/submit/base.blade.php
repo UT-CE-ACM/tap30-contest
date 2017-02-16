@@ -15,6 +15,18 @@
                         ({{ \App\Models\Submit::all()->count() }})</button>
                     </a>
                 </div>
+                <div class="btn-group" role="group">
+                    <a href="/admin/submit?trashed=1">
+                        <button type="button" class="btn btn-danger">فایل های پاک شده
+                            ({{ \App\Models\Submit::onlyTrashed()->get()->count() }})</button>
+                    </a>
+                </div>
+                <div class="btn-group" role="group">
+                    <a href="/admin/submit?judge_request=1">
+                        <button type="button" class="btn btn-success">فایل های منتظر جاج
+                            ({{ \App\Models\Submit::whereJudgeRequest(true)->get()->count() }})</button>
+                    </a>
+                </div>
                 {{--<div class="btn-group" role="group">
                     <a href="/admin/submit/create">
                         <button type="button" class="btn btn-success">ایجاد فایل جدید</button>
