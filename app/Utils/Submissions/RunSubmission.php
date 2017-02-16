@@ -213,7 +213,19 @@ class RunSubmission
             echo '<textarea class="col-md-4" style="max-height:400px; min-height: 250px;">User output: '. trim($output) . '</textarea></div>';
 
             // evaluating result of test case
-            $run->RMSE = RunSubmission::getRMSE($output, $tcOutput);
+            try {
+                $run->RMSE = RunSubmission::getRMSE($output, $tcOutput);
+            }
+            catch(\Exception $e){
+                $run->status = 'WR';
+                $run->message = $e->getMessage();
+                $run->RMSE = 500;
+                $run->save();
+                echo "</div><span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
+                echo "<p><b>Message</b>: " . $run->message . "</p>";
+                continue;
+
+            }
             $run->status = 'AC';
             $run->save();
 
