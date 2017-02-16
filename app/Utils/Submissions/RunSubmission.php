@@ -149,6 +149,10 @@ class RunSubmission
 
         // Run the compiled executable for each test case.
         $execute_command = RunSubmission::contextify('(ulimit -v ' . $memory_limit . '; mbox -n -i -r {{ tmp_directory }} -C {{ tmp_directory }} -- ' . $language->execute_command . ')', $context);
+        if ($language->file_extension == 'java'){
+            $execute_command = RunSubmission::contextify('mbox -n -i -r {{ tmp_directory }} -C {{ tmp_directory }} -- '. $language->execute_command , $context);
+        }
+//        echo '<p>'.$execute_command.'</p>';
 
         echo '<hr>';
         $counter = 1;
@@ -198,7 +202,7 @@ class RunSubmission
             if (!$process->isSuccessful()) {
                 // Runtime Error Exception
                 $run->status = 'RE';
-                $run->message = $process->getErrorOutput();;
+                $run->message = $process->getOutput() . '<br>' . $process->getErrorOutput();;
                 $run->RMSE = 1000;
                 $run->save();
                 echo "</div><span style='color: red'>Run has been failed because of ". $run->status ."!</span><br>";
