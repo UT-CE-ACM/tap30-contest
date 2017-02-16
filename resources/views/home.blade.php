@@ -145,7 +145,7 @@
                                     <div class="col-sm-2"><h4>نتیجه ی اجرا</h4></div>
                                     <div class="col-sm-10">
                                         <h4>{{ trans('general.'.$log->status) }}</h4>
-                                        <p style="direction: ltr; background-color: #ddd;white-space: pre">{{ ($log->message) }}</p>
+                                        <p style="direction: ltr; background-color: #ddd;white-space: pre-line">{{ ($log->message) }}</p>
                                     </div>
                                 </div>
                             @else
