@@ -10,7 +10,7 @@ use Faker\Provider\DateTime;
  * @property string output
  * @property integer problem_id
  * @property Problem problem
- * @property Attachment attachment
+ * @property Attachment[] attachments
  * @property DateTime created_at
  * @property DateTime updated_at
  *
@@ -36,9 +36,9 @@ class Sample extends BaseModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function attachment(){
-        return $this->morphOne("\\App\\Models\\Attachment", 'attachable');
+    public function attachments(){
+        return $this->morphMany("\\App\\Models\\Attachment", 'attachable');
     }
 }

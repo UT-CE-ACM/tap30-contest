@@ -40,6 +40,7 @@ Route::get('/table', 'HomeController@table')->middleware('timerChange');
 Route::get('/record/{record}', 'HomeController@recordDetail')->middleware(['timerChange', 'recordControl']);
 
 Route::post('/problem/{id}/submit', 'SubmitController@store');
+Route::post('/submit/{id}/judge-request', 'SubmitController@setJudgeRequest');
 Route::delete('/submit/{id}/remove', 'SubmitController@destroy');
 
 Route::group(

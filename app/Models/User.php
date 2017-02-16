@@ -17,6 +17,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property Record[] records
  * @property Member[] members
  * @property Submit[] submits
+ * @property integer num_of_requests
  * @property DateTime created_at
  * @property DateTime updated_at
  *
@@ -26,6 +27,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+
+    /**
+     * @var int
+     */
+    public static $maxNumOfRequest = 5;
 
     /**
      * The attributes that are mass assignable.

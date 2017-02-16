@@ -1,18 +1,6 @@
 html, body {
 	height: 100%;
 }
-html {
-	background-image: url('../img/back.jpg');
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-body {
-	background-color: rgba(18, 25, 32, 0.6);
-	/* background-image: url('../img/pattern.png'); */
-	background-position: center;
-	background-repeat: repeat;
-}
 .countdown-container {
 	position: absolute;
 	top: 50%;
@@ -57,13 +45,6 @@ body {
 
 /* Vahid */
 
-.navbar-default {
-	background: rgba(44, 62, 80, 0.6);
-	border-color: rgba(255, 255, 255, 0.4);
-}
-.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-text:hover {
-	color: #fff;
-}
 #credits {
 	position: fixed;
 	bottom: 0;

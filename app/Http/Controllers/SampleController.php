@@ -45,7 +45,9 @@ class SampleController extends Controller
             "problem_id" => "required|exists:problems,id",
             "input" => "required",
             "output" => "required",
-            "attachment" => 'file',
+            "input_file" => 'file|required',
+            "output_file" => 'file|required',
+            "data_file" => 'file|required'
         ];
         $this->validate($request, $rules);
 
@@ -55,9 +57,9 @@ class SampleController extends Controller
             'output' => $request->get('output'),
         ]);
 
-        if ($request->hasFile('attachment')){
-            $sample->saveFile('attachment');
-        }
+        $sample->saveFile('input_file',true);
+        $sample->saveFile('output_file',true);
+        $sample->saveFile('data_file',true);
 
         return redirect('/admin/sample');
     }
@@ -85,7 +87,7 @@ class SampleController extends Controller
         foreach (Problem::all() as $problem){
             $problems[$problem->id] = $problem->title;
         }
-        $sample = Sample::with('problem')->with('attachment')->find($id);
+        $sample = Sample::with('problem')->with('attachments')->find($id);
         return view('admin.sample.insert', compact('problems', 'sample'));
     }
 
@@ -102,7 +104,9 @@ class SampleController extends Controller
             "problem_id" => "required|exists:problems,id",
             "input" => "required",
             "output" => "required",
-            "attachment" => 'file'
+            "input_file" => 'file|required',
+            "output_file" => 'file|required',
+            "data_file" => 'file|required'
         ];
         $this->validate($request, $rules);
 
@@ -112,9 +116,10 @@ class SampleController extends Controller
         $sample->output = $request->get('output');
         $sample->save();
 
-        if ($request->hasFile('attachment')){
-            $sample->saveFile('attachment');
-        }
+        $sample->saveFile('input_file',true);
+        $sample->saveFile('output_file',true);
+        $sample->saveFile('data_file',true);
+
         return redirect('/admin/sample');
     }
 

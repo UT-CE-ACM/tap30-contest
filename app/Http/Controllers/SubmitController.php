@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Problem;
 use App\Models\Submit;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,9 +28,6 @@ class SubmitController extends Controller
      */
     public function create()
     {
-
-
-
     }
 
     /**
@@ -125,5 +123,29 @@ class SubmitController extends Controller
         else
             $submit->delete();
         return back();
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function setJudgeRequest($id)
+    {
+        $submit = Submit::find($id);
+        $user = Auth::user();
+        if ($user->num_of_requests < User::$maxNumOfRequest){
+            $user->num_of_requests ++;
+            $user->save();
+
+            $submit->judge_request = true;
+            $submit->save();
+
+            return back();
+        }
+        else{
+            $errors = collect();
+            $errors->push('تعداد درخواست های شما از حد مجاز گذشته است!');
+            return view('/home', compact('errors'));
+        }
     }
 }
