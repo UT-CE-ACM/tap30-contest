@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Problem;
 use App\Models\Submit;
 use App\Models\User;
+use App\Utils\Submissions\RunSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -147,5 +148,18 @@ class SubmitController extends Controller
             $errors->push('تعداد درخواست های شما از حد مجاز گذشته است!');
             return view('/home', compact('errors'));
         }
+    }
+
+    /**
+     * @param $id
+     */
+    public function runJudgeRequest($id)
+    {
+        $submit = Submit::find($id);
+        echo view('layouts.log');
+        $submit->has_request = false;
+        $submit->save();
+
+        RunSubmission::preJudge($submit);
     }
 }
