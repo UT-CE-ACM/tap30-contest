@@ -35,6 +35,13 @@
                             {{Form::close()}}
                         @endif
                         {{ Form::open(array('url' => '/admin/submit/'.$submit->id, 'method' => 'delete', 'class' => 'horizontal'))}}
+                        @if($submit->has_request)
+                                {{Form::open(array('url' => '/admin/submit/'.$submit->id.'/run-judge-request', 'method' => 'get', 'class' => 'horizontal'))}}
+                                <button type="submit" class="btn btn-info" >
+                                    <span class="glyphicons glyphicons-exclamation-sign"></span>
+                                </button>
+                                {{Form::close()}}
+                        @endif
                         @if($submit->trashed())
                             <button type="submit" class="btn btn-warning">
                                 <span class="glyphicon glyphicon-refresh"></span>
