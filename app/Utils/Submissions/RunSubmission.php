@@ -300,6 +300,13 @@ class RunSubmission
         if ($language->file_extension == 'java'){
             $execute_command = RunSubmission::contextify('mbox -n -i -r {{ tmp_directory }} -C {{ tmp_directory }} -- '. $language->execute_command , $context);
         }
+        else if ($language->file_extension == 'py'){
+            if ($language->name == 'Python 2'){
+                $execute_command = RunSubmission::contextify('python {{ tmp_directory }}/{{ problem_slug }}.py' , $context);
+            }else{
+                $execute_command = RunSubmission::contextify('python3.5 {{ tmp_directory }}/{{ problem_slug }}.py' , $context);
+            }
+        }
 
 
         $log = new Log;
