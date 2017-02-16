@@ -12,6 +12,7 @@ html {
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-height: 100vh;
+	background-attachment: fixed;
 }
 body {
 	background-color: rgba(18, 25, 32, 0.6);
