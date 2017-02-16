@@ -128,6 +128,19 @@
                                 {{ Form::close() }}
                             </div>
                             <p>زبان: {{ $submit->language->name . ' - ' . $submit->language->version }}</p>
+                            @if($submit->has_request)
+                                {{ Form::open(array('url'=>"/submit/".$submit->id."/judge-request", 'files' => true, 'class' => 'form-horizontal answer-form')) }}
+                                    <div class="form-group">
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-success btn-block" type="submit">درخواست اجرا کد</button>
+                                        </div>
+                                    </div>
+                                {{ Form::close() }}
+                            @else
+                                <div class="col-sm-4">
+                                    <button class="btn btn-default btn-block" type="button">درخواست شما در حال بررسی است!</button>
+                                </div>
+                            @endif
                         </div>
                     @else
                         {{ Form::open(array('url'=>"/problem/".$problem->id."/submit", 'files' => true, 'class' => 'form-horizontal answer-form')) }}

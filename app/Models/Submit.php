@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Problem problem
  * @property Attachment attachment
  * @property Run[] runs
+ * @property integer judge_request
  * @property DateTime created_at
  * @property DateTime updated_at
  * @property DateTime deleted_at
@@ -83,5 +84,12 @@ class Submit extends BaseModel
      */
     public function runs(){
         return $this->hasMany('\\App\\Models\\Run', 'submit_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function log(){
+        return $this->hasOne('\\App\\Models\\Log', 'submit_id');
     }
 }
