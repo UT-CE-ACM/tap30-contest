@@ -375,7 +375,7 @@ class RunSubmission
                 continue;
             }
             $log->status = 'AC';
-            $log->message = 'Your code was in correct order and was accepted!';
+            $log->message = 'Your code was accepted!';
             $log->save();
 
             echo "<span style='color: green'>Run has been done successfully!</span><br>";

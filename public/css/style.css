@@ -230,3 +230,11 @@ footer {
 	opacity: 1;
 	transform: scale(1);
 }
+
+/* submit log */
+.submit-log {
+	border-top: 3px dashed #396887;
+	background: #eee;
+	padding: 10px 20px;
+	margin-top: 30px;
+}

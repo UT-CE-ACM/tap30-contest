@@ -4,7 +4,8 @@ return [
 
     'AC' => 'Accepted',
     'RE' => 'Runtime Error',
-    'CE' => 'Compile Error',
+    'CE' => 'Compilation Error',
     'TL' => 'Time Limit',
+    'WR' => 'Wrong Answer Format',
 
 ];

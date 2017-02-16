@@ -138,18 +138,29 @@
                                 {{ Form::close() }}
                             </div>
                             <p>زبان: {{ $submit->language->name . ' - ' . $submit->language->version }}</p>
-                            @if($submit->judge_request == 0)
-                                {{ Form::open(array('url'=>"/submit/".$submit->id."/judge-request", 'files' => true, 'class' => 'form-horizontal answer-form')) }}
-                                    <div class="form-group">
-                                        <div class="col-sm-2">
-                                            <button class="btn btn-success btn-block" type="submit">درخواست اجرا کد</button>
-                                        </div>
+                            <?php $log = \App\Models\Log::whereSubmitId($submit->id)->first(); ?>
+                            @if($log)
+                                <div class="row submit-log">
+                                    <div class="col-sm-2"><h4>نتیجه ی اجرا</h4></div>
+                                    <div class="col-sm-10">
+                                        <h4>{{ trans('general.'.$log->status) }}</h4>
+                                        <p style="direction: ltr; background-color: #ddd;">{{ $log->message }}</p>
                                     </div>
-                                {{ Form::close() }}
-                            @else
-                                <div class="col-sm-4">
-                                    <button class="btn btn-default btn-block" type="button">درخواست شما در حال بررسی است!</button>
                                 </div>
+                            @else
+                                @if($submit->judge_request == 0)
+                                    {{ Form::open(array('url'=>"/submit/".$submit->id."/judge-request", 'files' => true, 'class' => 'form-horizontal answer-form')) }}
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                                <button class="btn btn-success btn-block" type="submit">درخواست اجرا کد</button>
+                                            </div>
+                                        </div>
+                                    {{ Form::close() }}
+                                @else
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-default btn-block" type="button">درخواست شما در حال بررسی است!</button>
+                                    </div>
+                                @endif
                             @endif
                         </div>
                     @else
