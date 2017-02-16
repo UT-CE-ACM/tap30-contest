@@ -138,6 +138,7 @@
                                 {{ Form::close() }}
                             </div>
                             <p>زبان: {{ $submit->language->name . ' - ' . $submit->language->version }}</p>
+                            <p style="background: #ddd;padding: 10px;display: inline-block;border-radius: 4px;border-bottom: 2px solid #bbb;margin: 20px 0 10px;">تعداد درخواست های باقی مانده: {{ \App\Models\User::$maxNumOfRequest - Auth::user()->num_of_requests }}</p>
                             <?php $log = \App\Models\Log::whereSubmitId($submit->id)->first(); ?>
                             @if($log)
                                 <div class="row submit-log">
